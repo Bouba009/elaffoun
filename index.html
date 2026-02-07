@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>العفرون أونلاين | El Affroun Online</title>
+    <!-- خط تجوال العربي -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* ==================== تنسيقات عامة CSS ==================== */
+        :root {
+            --primary-color: #ff6600; /* برتقالي مشابه لواد كنيس */
+            --secondary-color: #2c3e50;
+            --bg-color: #f4f4f4;
+            --text-color: #333;
+            --white: #fff;
+            --featured-color: #ffd700; /* ذهبي للإعلانات المميزة */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* شريط التنقل */
+        header {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .logo span { color: var(--white); }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1rem;
+            margin-left: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-links button:hover { color: var(--primary-color); }
+
+        /* ==================== الصفحة الرئيسية (Landing) ==================== */
+        #landing-page {
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .bg-zoom {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* صورة خلفية رمزية للتسوق */
+            background: url('https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            animation: zoomEffect 20s infinite alternate;
+            z-index: -1;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 0;
+        }
+
+        .landing-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .landing-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .btn-start {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn-start:hover {
+            transform: scale(1.1);
+            background-color: #e65c00;
+        }
+
+        @keyframes zoomEffect {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+
+        /* ==================== صفحة المصادقة (Auth) ==================== */
+        #auth-page {
+            display: none; /* مخفي افتراضيا */
+            padding: 50px 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .auth-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* ==================== التطبيق الرئيسي ==================== */
+        #main-app {
+            display: none;
+        }
+
+        /* سلايدر الأدمن */
+        .admin-slider {
+            width: 100%;
+            height: 300px;
+            background: #ddd;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: none;
+            position: relative;
+        }
+        .slide.active { display: block; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; }
+        .slide-text {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* التخطيط (Sidebar + Content) */
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        aside {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            height: fit-content;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        aside h3 { margin-bottom: 15px; border-bottom: 2px solid var(--primary-color); padding-bottom: 5px; }
+        
+        .filter-group { margin-bottom: 20px; }
+        .category-list button {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            text-align: right;
+            border: none;
+            background: none;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .category-list button:hover, .category-list button.active {
+            color: var(--primary-color);
+            background: #f9f9f9;
+            padding-right: 15px;
+        }
+
+        main {
+            flex: 3;
+        }
+
+        /* شبكة الإعلانات */
+        .ads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .ad-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .ad-card:hover { transform: translateY(-5px); }
+        
+        .ad-card.featured {
+            border: 2px solid var(--featured-color);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--featured-color);
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .ad-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .ad-content { padding: 15px; }
+        .ad-price { color: var(--primary-color); font-weight: bold; font-size: 1.2rem; }
+        .ad-title { font-size: 1rem; margin: 5px 0; color: #333; }
+        .ad-info { font-size: 0.8rem; color: #777; display: flex; justify-content: space-between; margin-top: 10px; }
+
+        .admin-controls {
+            padding: 10px;
+            background: #eee;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .btn-delete { color: red; cursor: pointer; }
+        .btn-star { color: #ccc; cursor: pointer; }
+        .btn-star.active { color: var(--featured-color); }
+
+        /* زر إضافة إعلان */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* رسائل التنبيه */
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 3000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+        }
+        .toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+
+        /* التجاوب */
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            .landing-content h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الهيدر -->
+    <header>
+        <div class="logo">El Affroun <span>Online</span></div>
+        <div class="nav-links">
+            <button onclick="showLanding()"><i class="fas fa-home"></i> الرئيسية</button>
+            <button id="auth-btn" onclick="showAuthPage()"><i class="fas fa-user"></i> دخول</button>
+            <button id="logout-btn" style="display:none;" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> خروج</button>
+        </div>
+    </header>
+
+    <!-- الصفحة الرئيسية Landing -->
+    <section id="landing-page">
+        <div class="bg-zoom"></div>
+        <div class="overlay"></div>
+        <div class="landing-content">
+            <h1>العفرون أونلاين</h1>
+            <p style="font-size: 1.5rem; margin-bottom: 30px;">سوقك الإلكتروني الأول للبيع والشراء</p>
+            <button class="btn-start" onclick="showAuthPage()">ابدأ الآن <i class="fas fa-arrow-left"></i></button>
+        </div>
+    </section>
+
+    <!-- صفحة التسجيل والدخول -->
+    <section id="auth-page">
+        <div class="auth-card">
+            <h2 id="auth-title" style="text-align: center; margin-bottom: 20px;">تسجيل دخول</h2>
+            
+            <form id="auth-form">
+                <div id="register-fields" style="display: none;">
+                    <div class="form-group">
+                        <label>الاسم الكامل</label>
+                        <input type="text" id="reg-name">
+                    </div>
+                    <div class="form-group">
+                        <label>رقم الهاتف</label>
+                        <input type="tel" id="reg-phone">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="auth-email" required>
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="auth-password" required>
+                </div>
+                
+                <div id="confirm-pass-field" class="form-group" style="display: none;">
+                    <label>إعادة كلمة المرور</label>
+                    <input type="password" id="reg-confirm-password">
+                </div>
+
+                <button type="submit" class="btn-submit" id="submit-btn">دخول</button>
+            </form>
+
+            <p style="text-align: center; margin-top: 15px; cursor: pointer; color: blue;" onclick="toggleAuthMode()" id="toggle-auth-text">
+                ليس لديك حساب؟ سجل الآن
+            </p>
+        </div>
+    </section>
+
+    <!-- التطبيق الرئيسي -->
+    <section id="main-app">
+        <!-- سلايدر إعلانات الأدمن -->
+        <div class="admin-slider" id="admin-slider">
+            <!-- سيتم إضافة الشرائح هنا بالجافاسكربت -->
+        </div>
+
+        <div class="container">
+            <!-- القائمة الجانبية والفلترة -->
+            <aside>
+                <h3>الفئات</h3>
+                <div class="category-list" id="category-filter">
+                    <button onclick="filterByCategory('all')" class="active">الكل</button>
+                    <button onclick="filterByCategory('vehicles')">سيارات و مركبات</button>
+                    <button onclick="filterByCategory('real_estate')">عقارات</button>
+                    <button onclick="filterByCategory('electronics')">هواتف و إلكترونيات</button>
+                    <button onclick="filterByCategory('jobs')">وظائف</button>
+                    <button onclick="filterByCategory('services')">خدمات</button>
+                    <button onclick="filterByCategory('home_appliances')">أجهزة كهرومنزلية</button>
+                    <button onclick="filterByCategory('fashion')">ألبسة و موضة</button>
+                    <button onclick="filterByCategory('professional')">معدات مهنية</button>
+                    <button onclick="filterByCategory('others')">أخرى</button>
+                </div>
+
+                <h3 style="margin-top: 20px;">فلترة السعر</h3>
+                <div class="filter-group">
+                    <input type="number" id="min-price" placeholder="أدنى سعر" class="form-group input" style="width: 100%; margin-bottom: 5px;">
+                    <input type="number" id="max-price" placeholder="أقصى سعر" class="form-group input" style="width: 100%; margin-bottom: 5px;">
+                    <button class="btn-submit" onclick="filterByPrice()">تطبيق</button>
+                </div>
+            </aside>
+
+            <!-- عرض الإعلانات -->
+            <main>
+                <h2 style="margin-bottom: 15px;">أحدث الإعلانات</h2>
+                <div class="ads-grid" id="ads-container">
+                    <!-- الإعلانات ستظهر هنا -->
+                    <p>جاري التحميل...</p>
+                </div>
+            </main>
+        </div>
+
+        <!-- زر إضافة إعلان عائم -->
+        <div class="fab" onclick="openAddModal()">
+            <i class="fas fa-plus"></i>
+        </div>
+    </section>
+
+    <!-- Modal إضافة إعلان -->
+    <div id="add-ad-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('add-ad-modal')">&times;</span>
+            <h2>إضافة إعلان جديد</h2>
+            <form id="add-ad-form" style="margin-top: 20px;">
+                <div class="form-group">
+                    <label>الفئة</label>
+                    <select id="ad-category" required>
+                        <option value="vehicles">سيارات و مركبات</option>
+                        <option value="real_estate">عقارات</option>
+                        <option value="electronics">هواتف و إلكترونيات</option>
+                        <option value="jobs">وظائف</option>
+                        <option value="services">خدمات</option>
+                        <option value="home_appliances">أجهزة كهرومنزلية</option>
+                        <option value="fashion">ألبسة و موضة</option>
+                        <option value="professional">معدات مهنية</option>
+                        <option value="others">أخرى</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>عنوان الإعلان</label>
+                    <input type="text" id="ad-title" required>
+                </div>
+                <div class="form-group">
+                    <label>السعر (DZD)</label>
+                    <input type="number" id="ad-price" required>
+                </div>
+                <div class="form-group">
+                    <label>الولاية</label>
+                    <select id="ad-wilaya" required>
+                        <!-- اختصار للولايات -->
+                        <option value="البليدة">البليدة</option>
+                        <option value="الجزائر">الجزائر</option>
+                        <option value="تيبازة">تيبازة</option>
+                        <option value="المدية">المدية</option>
+                        <option value="أخرى">أخرى</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>رقم الهاتف</label>
+                    <input type="tel" id="ad-phone" required>
+                </div>
+                <div class="form-group">
+                    <label>الوصف</label>
+                    <textarea id="ad-desc" rows="4" style="width: 100%; border:1px solid #ddd; padding:10px;" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>صورة الإعلان</label>
+                    <input type="file" id="ad-image" accept="image/*" required>
+                </div>
+                
+                <!-- خيار للأدمن فقط -->
+                <div id="admin-options" style="display: none; background: #ffe; padding: 10px; margin-bottom: 10px;">
+                    <label><input type="checkbox" id="is-admin-ad"> إعلان إداري (بانر/سلايدر)</label>
+                    <br>
+                    <small>إذا اخترت هذا الخيار سيظهر في السلايدر العلوي</small>
+                </div>
+
+                <button type="submit" class="btn-submit">نشر الإعلان</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal تفاصيل الإعلان -->
+    <div id="details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('details-modal')">&times;</span>
+            <div id="details-content">
+                <!-- Details injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">رسالة تنبيه</div>
+
+    <!-- ==================== Firebase & Logic ==================== -->
+    <script type="module">
+        // استيراد مكتبات Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, query, orderBy, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
+
+        // إعدادات Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAaXp-gUOQ_G2s-kM8JhaqW8TJcJ4Nqcuo",
+            authDomain: "comondi-fae4b.firebaseapp.com",
+            projectId: "comondi-fae4b",
+            storageBucket: "comondi-fae4b.firebasestorage.app",
+            messagingSenderId: "932777870241",
+            appId: "1:932777870241:web:78b0cf3a3cf14046be01e0",
+            measurementId: "G-M09RX0V18S"
+        };
+
+        // تهيئة التطبيق
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+
+        // متغيرات عامة
+        let currentUser = null;
+        let allAds = []; // لتخزين الإعلانات محلياً للفلترة السريعة
+        
+        // قائمة إيميلات الأدمن (لأغراض العرض، يفضل استخدام Custom Claims في الإنتاج الفعلي)
+        const ADMIN_EMAILS = ["admin@elaffroun.com", "admin@test.com"]; 
+
+        // ==================== دوال المساعدة (UI Helpers) ====================
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "toast show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        window.showLanding = () => {
+            document.getElementById('landing-page').style.display = 'flex';
+            document.getElementById('auth-page').style.display = 'none';
+            document.getElementById('main-app').style.display = 'none';
+        };
+
+        window.showAuthPage = () => {
+            if (currentUser) {
+                showApp();
+                return;
+            }
+            document.getElementById('landing-page').style.display = 'none';
+            document.getElementById('auth-page').style.display = 'block';
+            document.getElementById('main-app').style.display = 'none';
+        };
+
+        function showApp() {
+            document.getElementById('landing-page').style.display = 'none';
+            document.getElementById('auth-page').style.display = 'none';
+            document.getElementById('main-app').style.display = 'block';
+            getAds(); // جلب الإعلانات
+            getAdminAds(); // جلب السلايدر
+        }
+
+        window.openAddModal = () => {
+            document.getElementById('add-ad-modal').style.display = 'block';
+            // التحقق من الأدمن لإظهار خيارات الأدمن
+            if(currentUser && ADMIN_EMAILS.includes(currentUser.email)) {
+                document.getElementById('admin-options').style.display = 'block';
+            }
+        };
+
+        window.closeModal = (id) => {
+            document.getElementById(id).style.display = 'none';
+        };
+
+        // تبديل بين تسجيل دخول وإنشاء حساب
+        let isLoginMode = true;
+        window.toggleAuthMode = () => {
+            isLoginMode = !isLoginMode;
+            const title = document.getElementById('auth-title');
+            const submitBtn = document.getElementById('submit-btn');
+            const toggleText = document.getElementById('toggle-auth-text');
+            const regFields = document.getElementById('register-fields');
+            const confirmPass = document.getElementById('confirm-pass-field');
+
+            if (!isLoginMode) {
+                title.innerText = "إنشاء حساب جديد";
+                submitBtn.innerText = "تسجيل";
+                toggleText.innerText = "لديك حساب بالفعل؟ سجل دخول";
+                regFields.style.display = 'block';
+                confirmPass.style.display = 'block';
+            } else {
+                title.innerText = "تسجيل دخول";
+                submitBtn.innerText = "دخول";
+                toggleText.innerText = "ليس لديك حساب؟ سجل الآن";
+                regFields.style.display = 'none';
+                confirmPass.style.display = 'none';
+            }
+        };
+
+        // ==================== المصادقة (Auth) ====================
+
+        document.getElementById('auth-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+
+            try {
+                if (isLoginMode) {
+                    // تسجيل دخول
+                    await signInWithEmailAndPassword(auth, email, password);
+                    showToast("تم تسجيل الدخول بنجاح");
+                    showApp();
+                } else {
+                    // تسجيل جديد
+                    const confirmPass = document.getElementById('reg-confirm-password').value;
+                    const name = document.getElementById('reg-name').value;
+                    const phone = document.getElementById('reg-phone').value;
+
+                    if (password !== confirmPass) {
+                        showToast("كلمات المرور غير متطابقة");
+                        return;
+                    }
+
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    // يمكن هنا حفظ بيانات إضافية في Firestore collection 'users'
+                    // للتبسيط، سنعتمد على Auth فقط حالياً
+                    showToast("تم إنشاء الحساب بنجاح");
+                    showApp();
+                }
+            } catch (error) {
+                showToast("خطأ: " + error.message);
+                console.error(error);
+            }
+        });
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                document.getElementById('auth-btn').style.display = 'none';
+                document.getElementById('logout-btn').style.display = 'block';
+            } else {
+                currentUser = null;
+                document.getElementById('auth-btn').style.display = 'block';
+                document.getElementById('logout-btn').style.display = 'none';
+            }
+        });
+
+        window.logoutUser = () => {
+            signOut(auth).then(() => {
+                showToast("تم تسجيل الخروج");
+                showLanding();
+            });
+        };
+
+        // ==================== إدارة الإعلانات (Ads Logic) ====================
+
+        // دالة رفع الصورة
+        async function uploadImage(file) {
+            const storageRef = ref(storage, 'ads_images/' + Date.now() + '_' + file.name);
+            await uploadBytes(storageRef, file);
+            return await getDownloadURL(storageRef);
+        }
+
+        // إضافة إعلان
+        document.getElementById('add-ad-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                showToast("يجب تسجيل الدخول لنشر إعلان");
+                return;
+            }
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerText = "جاري النشر...";
+
+            try {
+                const category = document.getElementById('ad-category').value;
+                const title = document.getElementById('ad-title').value;
+                const price = Number(document.getElementById('ad-price').value);
+                const wilaya = document.getElementById('ad-wilaya').value;
+                const phone = document.getElementById('ad-phone').value;
+                const description = document.getElementById('ad-desc').value;
+                const imageFile = document.getElementById('ad-image').files[0];
+                
+                const isAdminAd = document.getElementById('is-admin-ad').checked;
+
+                // 1. رفع الصورة
+                const imageUrl = await uploadImage(imageFile);
+
+                // 2. إعداد البيانات
+                const adData = {
+                    title,
+                    price,
+                    category,
+                    wilaya,
+                    phone,
+                    description,
+                    imageUrl,
+                    userId: currentUser.uid,
+                    createdAt: serverTimestamp(),
+                    isFeatured: false, // Default
+                    isAdminAd: isAdminAd // True if checked by admin
+                };
+
+                // 3. الحفظ في Firestore
+                // إذا كان إعلان أدمن (للسلايدر) نحفظه في admin_ads أو ads مع flag
+                // لتبسيط الكود سنحفظ كل شيء في 'ads' ونميزه بالـ isAdminAd للعرض في السلايدر
+                await addDoc(collection(db, "ads"), adData);
+
+                showToast("تم نشر الإعلان بنجاح!");
+                closeModal('add-ad-modal');
+                document.getElementById('add-ad-form').reset();
+                getAds(); // تحديث القائمة
+
+            } catch (error) {
+                showToast("حدث خطأ أثناء النشر");
+                console.error(error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "نشر الإعلان";
+            }
+        });
+
+        // جلب الإعلانات وعرضها
+        async function getAds() {
+            const container = document.getElementById('ads-container');
+            container.innerHTML = '<p>جاري التحميل...</p>';
+            
+            try {
+                const q = query(collection(db, "ads"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+                
+                allAds = []; // تصفير المصفوفة المحلية
+                querySnapshot.forEach((doc) => {
+                    let data = doc.data();
+                    data.id = doc.id;
+                    allAds.push(data);
+                });
+
+                renderAds(allAds);
+
+            } catch (error) {
+                console.error("Error getting documents: ", error);
+                container.innerHTML = '<p>خطأ في تحميل البيانات.</p>';
+            }
+        }
+
+        // دالة رسم الإعلانات في HTML
+        function renderAds(adsList) {
+            const container = document.getElementById('ads-container');
+            container.innerHTML = '';
+
+            // تصفية إعلانات الأدمن (البانرات) من القائمة الرئيسية، عرض فقط إعلانات المستخدمين العادية والمميزة
+            // (إلا إذا أردنا عرض البانرات كبطاقات أيضاً، لكن سنفترض أن البانرات تذهب للسلايدر فقط)
+            const displayList = adsList.filter(ad => !ad.isAdminAd);
+
+            if (displayList.length === 0) {
+                container.innerHTML = '<p>لا توجد إعلانات مطابقة.</p>';
+                return;
+            }
+
+            displayList.forEach(ad => {
+                const isFeaturedClass = ad.isFeatured ? 'featured' : '';
+                const badge = ad.isFeatured ? '<span class="featured-badge"><i class="fas fa-star"></i> مميز</span>' : '';
+                
+                // أدوات الأدمن
+                let adminTools = '';
+                if(currentUser && ADMIN_EMAILS.includes(currentUser.email)) {
+                    adminTools = `
+                        <div class="admin-controls">
+                            <i class="fas fa-trash btn-delete" onclick="deleteAd('${ad.id}')" title="حذف"></i>
+                            <i class="fas fa-star btn-star ${ad.isFeatured ? 'active' : ''}" onclick="toggleFeatured('${ad.id}', ${!ad.isFeatured})" title="تثبيت/تمييز"></i>
+                        </div>
+                    `;
+                }
+
+                const cardHTML = `
+                    <div class="ad-card ${isFeaturedClass}">
+                        ${badge}
+                        <img src="${ad.imageUrl}" class="ad-img" alt="${ad.title}">
+                        <div class="ad-content" onclick="showAdDetails('${ad.id}')">
+                            <h4 class="ad-title">${ad.title}</h4>
+                            <div class="ad-price">${ad.price.toLocaleString()} DZD</div>
+                            <div class="ad-info">
+                                <span><i class="fas fa-map-marker-alt"></i> ${ad.wilaya}</span>
+                                <span><i class="fas fa-tag"></i> ${getCategoryName(ad.category)}</span>
+                            </div>
+                        </div>
+                        ${adminTools}
+                        <button style="width:100%; padding:10px; background:#f4f4f4; border:none; cursor:pointer;" onclick="showAdDetails('${ad.id}')">تفاصيل</button>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', cardHTML);
+            });
+        }
+
+        // جلب إعلانات السلايدر (Ads where isAdminAd = true)
+        async function getAdminAds() {
+            const slider = document.getElementById('admin-slider');
+            // فلترة المصفوفة المحلية (لأننا جلبنا كل شيء في getAds لتقليل القراءات)
+            // لكن لضمان التحديث، يمكن عمل كويري منفصل. هنا سنستخدم المصفوفة allAds إذا كانت محملة
+            
+            // انتظر قليلاً حتى تملأ allAds أو قم بطلب جديد
+            const q = query(collection(db, "ads"), where("isAdminAd", "==", true));
+            const querySnapshot = await getDocs(q);
+            
+            let slidesHTML = '';
+            let count = 0;
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const activeClass = count === 0 ? 'active' : '';
+                slidesHTML += `
+                    <div class="slide ${activeClass} fade">
+                        <img src="${data.imageUrl}" alt="Admin Ad">
+                        <div class="slide-text">
+                            <h2>${data.title}</h2>
+                            <p>${data.price} DZD</p>
+                        </div>
+                    </div>
+                `;
+                count++;
+            });
+
+            if(count > 0) {
+                slider.innerHTML = slidesHTML;
+                startSlider();
+            } else {
+                slider.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100%;">مساحة إعلانية</div>';
+            }
+        }
+
+        // تشغيل السلايدر
+        function startSlider() {
+            let slideIndex = 0;
+            const slides = document.getElementsByClassName("slide");
+            if (slides.length === 0) return;
+
+            setInterval(() => {
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";  
+                }
+                slideIndex++;
+                if (slideIndex > slides.length) {slideIndex = 1}    
+                slides[slideIndex-1].style.display = "block";  
+            }, 3000); // تغيير كل 3 ثواني
+        }
+
+        // عرض التفاصيل
+        window.showAdDetails = (id) => {
+            const ad = allAds.find(a => a.id === id);
+            if (!ad) return;
+
+            const content = document.getElementById('details-content');
+            content.innerHTML = `
+                <img src="${ad.imageUrl}" style="width:100%; max-height:300px; object-fit:contain; margin-bottom:15px;">
+                <h2 style="color:var(--primary-color);">${ad.price.toLocaleString()} DZD</h2>
+                <h3>${ad.title}</h3>
+                <hr style="margin:10px 0;">
+                <p><strong>الوصف:</strong><br>${ad.description}</p>
+                <br>
+                <p><strong><i class="fas fa-map-marker-alt"></i> الولاية:</strong> ${ad.wilaya}</p>
+                <p><strong><i class="fas fa-phone"></i> الهاتف:</strong> <a href="tel:${ad.phone}">${ad.phone}</a></p>
+                <p><strong><i class="fas fa-tag"></i> الفئة:</strong> ${getCategoryName(ad.category)}</p>
+            `;
+            document.getElementById('details-modal').style.display = 'block';
+        };
+
+        // ==================== الفلترة ====================
+
+        window.filterByCategory = (cat) => {
+            // تحديث UI الأزرار
+            const buttons = document.querySelectorAll('#category-filter button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (cat === 'all') {
+                renderAds(allAds);
+            } else {
+                const filtered = allAds.filter(ad => ad.category === cat);
+                renderAds(filtered);
+            }
+        };
+
+        window.filterByPrice = () => {
+            const min = document.getElementById('min-price').value;
+            const max = document.getElementById('max-price').value;
+
+            let filtered = allAds;
+
+            if (min) filtered = filtered.filter(ad => ad.price >= min);
+            if (max) filtered = filtered.filter(ad => ad.price <= max);
+
+            renderAds(filtered);
+        };
+
+        function getCategoryName(key) {
+            const map = {
+                'vehicles': 'سيارات و مركبات',
+                'real_estate': 'عقارات',
+                'electronics': 'هواتف و إلكترونيات',
+                'jobs': 'وظائف',
+                'services': 'خدمات',
+                'home_appliances': 'أجهزة كهرومنزلية',
+                'fashion': 'ألبسة و موضة',
+                'professional': 'معدات مهنية',
+                'others': 'أخرى'
+            };
+            return map[key] || key;
+        }
+
+        // ==================== وظائف الأدمن ====================
+
+        window.deleteAd = async (id) => {
+            if(!confirm("هل أنت متأكد من حذف هذا الإعلان؟")) return;
+            try {
+                await deleteDoc(doc(db, "ads", id));
+                showToast("تم حذف الإعلان");
+                // تحديث المصفوفة المحلية
+                allAds = allAds.filter(a => a.id !== id);
+                renderAds(allAds);
+            } catch (err) {
+                console.error(err);
+                showToast("فشل الحذف");
+            }
+        };
+
+        window.toggleFeatured = async (id, status) => {
+            try {
+                await updateDoc(doc(db, "ads", id), {
+                    isFeatured: status
+                });
+                showToast(status ? "تم تمييز الإعلان" : "تم إلغاء التمييز");
+                // تحديث محلي سريع
+                const index = allAds.findIndex(a => a.id === id);
+                if(index !== -1) allAds[index].isFeatured = status;
+                renderAds(allAds);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        // جعل الوظائف متاحة في النطاق العام (Global Scope) لأننا نستخدم module
+        // في الـ module الدوال لا تكون متاحة مباشرة في html onclick إلا إذا ربطناها بـ window
+        // تم ربط الدوال أعلاه (مثل window.showLanding = ...)
+    </script>
+</body>
+</html>
