@@ -6,20 +6,20 @@
     <title>العفرون أونلاين | El Affroun Online</title>
     <!-- خط تجوال -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <!-- مكتبة الأيقونات -->
+    <!-- أيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ==================== المتغيرات والتصميم ==================== */
+        /* ==================== Design System ==================== */
         :root {
             --primary: #2563eb;
             --primary-dark: #1e40af;
-            --accent: #f59e0b; /* لون برتقالي/ذهبي */
-            --glass-bg: rgba(255, 255, 255, 0.9);
+            --accent: #ff6b6b;
             --text-dark: #1f2937;
             --text-light: #6b7280;
-            --bg-body: #f3f4f6;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --bg-body: #f8fafc;
+            --white: #ffffff;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; outline: none; }
@@ -27,7 +27,8 @@
 
         /* Header */
         header {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             padding: 15px 5%;
             display: flex;
             justify-content: space-between;
@@ -35,21 +36,16 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: var(--shadow);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 10px; }
-        .logo i { color: var(--accent); }
-
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px; }
         .nav-links button {
             background: transparent; border: none; font-size: 1rem; font-weight: 600;
-            margin-left: 20px; cursor: pointer; transition: 0.2s; color: var(--text-dark);
+            margin-left: 15px; cursor: pointer; color: var(--text-dark); transition: 0.2s;
         }
         .nav-links button:hover { color: var(--primary); }
-        .btn-login {
-            background: var(--primary) !important; color: white !important;
-            padding: 8px 20px; border-radius: 6px;
-        }
+        .btn-login { background: var(--primary) !important; color: white !important; padding: 8px 16px; border-radius: 6px; }
 
         /* Landing Page */
         #landing-page {
@@ -59,123 +55,130 @@
 
         .bg-zoom {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            /* صورة سوق */
-            background: url('https://images.unsplash.com/photo-1533900298318-6b8da08a523e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            /* صورة مول تجاري كبير */
+            background: url('https://images.unsplash.com/photo-1519567241046-7f570eee3d9f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
             animation: zoomInfinite 30s infinite alternate ease-in-out;
             z-index: -1;
         }
-        @keyframes zoomInfinite { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
+        @keyframes zoomInfinite { 0% { transform: scale(1); } 100% { transform: scale(1.3); } }
 
-        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 0; }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)); z-index: 0; }
 
-        .landing-content { z-index: 2; max-width: 700px; padding: 20px; }
-        .landing-content h1 { font-size: 3.5rem; margin-bottom: 15px; font-weight: 900; }
+        .landing-content { z-index: 2; max-width: 800px; padding: 20px; }
+        .landing-content h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
         .btn-start {
-            padding: 15px 40px; font-size: 1.2rem; background: var(--accent); color: white;
-            border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; margin-top: 20px;
+            padding: 15px 50px; font-size: 1.2rem; background: var(--primary); color: white;
+            border: none; border-radius: 50px; cursor: pointer; transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.5);
         }
-        .btn-start:hover { transform: scale(1.05); background: #d97706; }
+        .btn-start:hover { transform: translateY(-5px); background: var(--primary-dark); }
 
-        /* Main App Structure */
-        #main-app { display: none; padding-bottom: 80px; }
-        .container { display: flex; max-width: 1300px; margin: 30px auto; padding: 0 20px; gap: 30px; }
-
-        /* Sidebar */
-        aside {
-            flex: 0 0 260px; background: white; padding: 20px; border-radius: 12px;
-            height: fit-content; position: sticky; top: 90px; box-shadow: var(--shadow);
-        }
-        aside h3 { margin-bottom: 15px; font-size: 1.1rem; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        
-        .category-item {
-            padding: 10px; margin-bottom: 5px; cursor: pointer; border-radius: 6px; transition: 0.2s;
-            display: flex; align-items: center; gap: 10px; color: var(--text-light);
-        }
-        .category-item:hover, .category-item.active { background: #eff6ff; color: var(--primary); font-weight: bold; }
-        .filter-input { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 6px; }
-
-        /* Main Content */
-        main { flex: 1; }
-
-        /* Grid */
-        .ads-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
-        
-        .ad-card {
-            background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow);
-            transition: 0.3s; position: relative; border: 1px solid #f0f0f0;
-        }
-        .ad-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
-        
-        .ad-img { width: 100%; height: 180px; object-fit: cover; background: #eee; }
-        .ad-body { padding: 15px; }
-        .ad-price { font-size: 1.1rem; font-weight: 800; color: var(--primary); }
-        .ad-title { margin: 5px 0; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .ad-meta { font-size: 0.85rem; color: #888; display: flex; justify-content: space-between; margin-top: 10px; }
-
-        .featured-badge {
-            position: absolute; top: 10px; right: 10px; background: var(--accent); color: white;
-            padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold;
-        }
+        /* Main App */
+        #main-app { display: none; padding-bottom: 100px; min-height: 100vh; }
+        .container { max-width: 1400px; margin: 30px auto; padding: 0 20px; }
 
         /* Admin Slider */
-        .slider-container { width: 100%; height: 300px; border-radius: 12px; overflow: hidden; margin-bottom: 30px; position: relative; display: none; }
+        .slider-container { width: 100%; height: 320px; border-radius: 16px; overflow: hidden; margin-bottom: 30px; position: relative; display: none; box-shadow: var(--shadow); }
         .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: 1s; }
         .slide.active { opacity: 1; }
         .slide img { width: 100%; height: 100%; object-fit: cover; }
+        .slide-content { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; padding: 20px; }
 
-        /* FAB */
-        .fab {
-            position: fixed; bottom: 30px; left: 30px; width: 60px; height: 60px;
-            background: var(--primary); color: white; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; font-size: 24px;
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.4); cursor: pointer; transition: 0.3s; z-index: 900;
+        /* Product Grid (Full Width) */
+        .ads-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
+        
+        .ad-card {
+            background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: 0.3s; position: relative; border: 1px solid #f1f5f9; cursor: pointer;
         }
+        .ad-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        
+        .ad-img { width: 100%; height: 200px; object-fit: cover; background: #eee; }
+        .ad-body { padding: 15px; }
+        .ad-price { font-size: 1.2rem; font-weight: 800; color: var(--primary); }
+        .ad-title { margin: 8px 0; font-size: 1rem; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .ad-meta { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-light); margin-top: 10px; }
+
+        .featured-badge { position: absolute; top: 10px; right: 10px; background: #fbbf24; color: black; padding: 5px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+
+        /* Floating Action Buttons */
+        .fab-container { position: fixed; bottom: 30px; left: 30px; display: flex; flex-direction: column; gap: 15px; z-index: 900; }
+        
+        .fab {
+            width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            color: white; font-size: 24px; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.2); transition: 0.3s;
+        }
+        .fab-add { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); }
+        .fab-filter { background: linear-gradient(135deg, var(--text-dark), #000); }
+        
         .fab:hover { transform: scale(1.1); }
 
-        /* Modals */
-        .modal {
-            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center;
+        /* Filter Drawer (Off-Canvas) */
+        .filter-drawer {
+            position: fixed; top: 0; right: -320px; width: 300px; height: 100%;
+            background: white; z-index: 2500; padding: 25px; box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto;
         }
-        .modal-content { background: white; width: 90%; max-width: 450px; padding: 25px; border-radius: 16px; position: relative; animation: popUp 0.3s; }
-        @keyframes popUp { from {transform: scale(0.9); opacity: 0;} to {transform: scale(1); opacity: 1;} }
+        .filter-drawer.open { right: 0; }
+        
+        .drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        .drawer-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5);
+            z-index: 2400; display: none; opacity: 0; transition: opacity 0.3s; backdrop-filter: blur(2px);
+        }
+        .drawer-overlay.show { display: block; opacity: 1; }
+
+        .category-item {
+            padding: 12px; margin-bottom: 8px; border-radius: 8px; cursor: pointer; transition: 0.2s;
+            display: flex; align-items: center; gap: 10px; color: var(--text-dark); background: #f8fafc;
+        }
+        .category-item:hover, .category-item.active { background: #eff6ff; color: var(--primary); font-weight: bold; }
+        
+        .btn-apply {
+            width: 100%; padding: 15px; background: var(--primary); color: white; border: none;
+            border-radius: 10px; font-size: 1.1rem; margin-top: 20px; cursor: pointer;
+        }
+
+        /* Modals & Forms */
+        .modal {
+            display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); align-items: center; justify-content: center;
+        }
+        .modal-content { background: white; width: 90%; max-width: 500px; padding: 30px; border-radius: 20px; position: relative; animation: popUp 0.3s; }
+        @keyframes popUp { from {transform: scale(0.95); opacity: 0;} to {transform: scale(1); opacity: 1;} }
         
         .close { position: absolute; left: 20px; top: 20px; font-size: 24px; cursor: pointer; color: #999; }
         .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; }
         .form-group input, .form-group select, .form-group textarea {
-            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; background: #f9fafb;
+            width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 10px; background: #f8fafc; transition: 0.3s;
         }
-        .btn-submit { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; }
-        .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
-
-        /* Admin Controls */
-        .admin-controls { margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px; display: flex; gap: 5px; }
-        .btn-mini { flex: 1; padding: 5px; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
-        .btn-del { background: #fee2e2; color: #ef4444; }
-        .btn-star { background: #fef3c7; color: #d97706; }
-
+        .form-group input:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        
+        .btn-submit { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1rem; cursor: pointer; }
+        
         /* Toast */
         #toast {
-            visibility: hidden; min-width: 250px; background: #333; color: #fff; text-align: center;
-            border-radius: 8px; padding: 16px; position: fixed; z-index: 3000; left: 50%; bottom: 30px;
-            transform: translateX(-50%); box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            visibility: hidden; min-width: 280px; background: #1f2937; color: #fff; text-align: center;
+            border-radius: 50px; padding: 16px; position: fixed; z-index: 9999; left: 50%; bottom: 30px;
+            transform: translateX(-50%); box-shadow: 0 10px 20px rgba(0,0,0,0.2); font-weight: 500;
         }
         #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
 
-        @media (max-width: 768px) {
-            .container { flex-direction: column; }
-            aside { position: relative; top: 0; width: 100%; }
-        }
+        /* Admin Controls */
+        .admin-controls { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #e2e8f0; display: flex; gap: 10px; }
+        .btn-mini { flex: 1; padding: 6px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.85rem; transition: 0.2s; }
+        .btn-del { background: #fee2e2; color: #ef4444; }
+        .btn-star { background: #fef3c7; color: #d97706; }
     </style>
 </head>
 <body>
 
     <!-- Header -->
     <header>
-        <div class="logo"><i class="fas fa-store"></i> El Affroun Online</div>
+        <div class="logo"><i class="fas fa-city"></i> El Affroun Online</div>
         <div class="nav-links">
             <button onclick="showLanding()">الرئيسية</button>
             <button id="login-btn" class="btn-login" onclick="openModal('auth-modal')">دخول</button>
@@ -183,77 +186,84 @@
         </div>
     </header>
 
-    <!-- Landing -->
+    <!-- Landing Page -->
     <section id="landing-page">
         <div class="bg-zoom"></div>
         <div class="overlay"></div>
         <div class="landing-content">
-            <h1>العفرون أونلاين</h1>
-            <p style="font-size: 1.3rem; margin-bottom: 20px; opacity: 0.9;">أكبر منصة محلية للبيع والشراء بكل سهولة</p>
-            <button class="btn-start" onclick="showApp()">تصفح المنتجات</button>
+            <h1>مول العفرون أونلاين</h1>
+            <p style="font-size: 1.4rem; color: #e2e8f0; margin-bottom: 30px;">تصفح، اشتري، وبع بكل سهولة في أكبر سوق إلكتروني في المنطقة</p>
+            <button class="btn-start" onclick="showApp()">تصفح المنتجات <i class="fas fa-arrow-left"></i></button>
         </div>
     </section>
 
     <!-- Main App -->
     <section id="main-app">
         <div class="container">
-            <!-- Sidebar -->
-            <aside>
-                <h3><i class="fas fa-filter"></i> الفلترة</h3>
-                <div style="margin-bottom: 20px;">
-                    <input type="number" id="price-min" class="filter-input" placeholder="أقل سعر">
-                    <input type="number" id="price-max" class="filter-input" placeholder="أعلى سعر">
-                    <button class="btn-submit" style="padding: 8px;" onclick="filterByPrice()">بحث بالسعر</button>
-                </div>
+            <!-- Slider -->
+            <div class="slider-container" id="admin-slider"></div>
 
-                <h3><i class="fas fa-list"></i> التصنيفات</h3>
-                <div id="cats-list">
-                    <div class="category-item active" onclick="filterCat('all', this)"><i class="fas fa-th-large"></i> الكل</div>
-                    <div class="category-item" onclick="filterCat('vehicles', this)"><i class="fas fa-car"></i> سيارات</div>
-                    <div class="category-item" onclick="filterCat('real_estate', this)"><i class="fas fa-home"></i> عقارات</div>
-                    <div class="category-item" onclick="filterCat('electronics', this)"><i class="fas fa-mobile"></i> هواتف</div>
-                    <div class="category-item" onclick="filterCat('clothes', this)"><i class="fas fa-tshirt"></i> ملابس</div>
-                    <div class="category-item" onclick="filterCat('services', this)"><i class="fas fa-tools"></i> خدمات</div>
-                    <div class="category-item" onclick="filterCat('others', this)"><i class="fas fa-box"></i> أخرى</div>
-                </div>
-            </aside>
-
-            <!-- Content -->
-            <main>
-                <!-- Admin Banner Slider -->
-                <div class="slider-container" id="admin-slider">
-                    <!-- Slides JS -->
-                </div>
-
-                <div class="ads-grid" id="ads-container">
-                    <p style="grid-column: 1/-1; text-align: center;">جاري التحميل...</p>
-                </div>
-            </main>
+            <!-- Products Grid (Full Width) -->
+            <div class="ads-grid" id="ads-container">
+                <p style="grid-column: 1/-1; text-align: center; margin-top: 50px;">جاري تحميل المنتجات...</p>
+            </div>
         </div>
         
-        <div class="fab" onclick="openAddModal()"><i class="fas fa-plus"></i></div>
+        <!-- Floating Buttons -->
+        <div class="fab-container">
+            <!-- Filter Button -->
+            <div class="fab fab-filter" onclick="toggleDrawer(true)" title="فلترة المنتجات">
+                <i class="fas fa-sliders-h"></i>
+            </div>
+            <!-- Add Button -->
+            <div class="fab fab-add" onclick="openAddModal()" title="إضافة إعلان">
+                <i class="fas fa-plus"></i>
+            </div>
+        </div>
     </section>
 
-    <!-- Auth Modal (Unified) -->
+    <!-- Filter Drawer (القائمة الجانبية المنبثقة) -->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="toggleDrawer(false)"></div>
+    <div class="filter-drawer" id="filter-drawer">
+        <div class="drawer-header">
+            <h3><i class="fas fa-filter"></i> فلترة وتصنيف</h3>
+            <i class="fas fa-times" style="cursor: pointer; font-size: 1.2rem;" onclick="toggleDrawer(false)"></i>
+        </div>
+
+        <div class="form-group">
+            <label>نطاق السعر</label>
+            <input type="number" id="price-min" placeholder="أقل سعر" style="margin-bottom: 5px;">
+            <input type="number" id="price-max" placeholder="أعلى سعر">
+        </div>
+
+        <div style="margin-top: 25px;">
+            <label style="font-weight: bold; display: block; margin-bottom: 10px;">الفئات</label>
+            <div id="cats-list">
+                <div class="category-item active" onclick="selectCat('all', this)"><i class="fas fa-border-all"></i> الكل</div>
+                <div class="category-item" onclick="selectCat('vehicles', this)"><i class="fas fa-car"></i> سيارات</div>
+                <div class="category-item" onclick="selectCat('real_estate', this)"><i class="fas fa-home"></i> عقارات</div>
+                <div class="category-item" onclick="selectCat('electronics', this)"><i class="fas fa-mobile-alt"></i> إلكترونيات</div>
+                <div class="category-item" onclick="selectCat('clothes', this)"><i class="fas fa-tshirt"></i> ملابس</div>
+                <div class="category-item" onclick="selectCat('services', this)"><i class="fas fa-tools"></i> خدمات</div>
+                <div class="category-item" onclick="selectCat('others', this)"><i class="fas fa-box-open"></i> أخرى</div>
+            </div>
+        </div>
+
+        <button class="btn-apply" onclick="applyFilters()">تطبيق الفلاتر</button>
+    </div>
+
+    <!-- Auth Modal -->
     <div id="auth-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('auth-modal')">&times;</span>
             <h2 id="auth-title" style="text-align: center; margin-bottom: 20px;">تسجيل الدخول</h2>
             <form id="auth-form">
-                <div id="reg-fields" style="display: none;">
-                    <div class="form-group"><input type="text" id="reg-name" placeholder="الاسم الكامل"></div>
-                </div>
-                <!-- Username/Email Field -->
-                <div class="form-group">
-                    <input type="text" id="auth-email" placeholder="البريد الإلكتروني أو اسم المستخدم" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" id="auth-pass" placeholder="كلمة المرور" required>
-                </div>
+                <div class="form-group"><input type="text" id="auth-email" placeholder="البريد الإلكتروني أو اسم المستخدم" required></div>
+                <div class="form-group"><input type="password" id="auth-pass" placeholder="كلمة المرور" required></div>
                 <button type="submit" class="btn-submit">دخول</button>
             </form>
-            <p style="text-align: center; margin-top: 15px; cursor: pointer; color: var(--primary);" onclick="toggleAuth()">
-                <span id="auth-toggle-text">ليس لديك حساب؟ سجل الآن</span>
+            <p style="text-align: center; margin-top: 15px; cursor: pointer; color: var(--primary); font-size: 0.9rem;" onclick="showToast('نظام التسجيل مدمج حالياً')">
+                (أدخل admin / abobob123 للدخول كمسؤول)
             </p>
         </div>
     </div>
@@ -262,32 +272,32 @@
     <div id="add-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('add-modal')">&times;</span>
-            <h2 style="margin-bottom: 15px;">إضافة إعلان</h2>
+            <h2 style="margin-bottom: 20px;">إضافة إعلان جديد</h2>
             <form id="add-form">
                 <div class="form-group">
+                    <label>الفئة</label>
                     <select id="ad-cat" required>
                         <option value="vehicles">سيارات</option>
                         <option value="real_estate">عقارات</option>
-                        <option value="electronics">هواتف وإلكترونيات</option>
+                        <option value="electronics">إلكترونيات</option>
                         <option value="clothes">ملابس</option>
                         <option value="services">خدمات</option>
                         <option value="others">أخرى</option>
                     </select>
                 </div>
-                <div class="form-group"><input type="text" id="ad-title" placeholder="العنوان" required></div>
+                <div class="form-group"><input type="text" id="ad-title" placeholder="عنوان المنتج" required></div>
                 <div class="form-group"><input type="number" id="ad-price" placeholder="السعر (DZD)" required></div>
                 <div class="form-group">
                     <select id="ad-wilaya">
-                        <option>البليدة</option><option>الجزائر</option><option>أخرى</option>
+                        <option>البليدة</option><option>الجزائر</option><option>تيبازة</option><option>أخرى</option>
                     </select>
                 </div>
                 <div class="form-group"><input type="tel" id="ad-phone" placeholder="رقم الهاتف" required></div>
-                <div class="form-group"><textarea id="ad-desc" rows="3" placeholder="الوصف"></textarea></div>
+                <div class="form-group"><textarea id="ad-desc" rows="3" placeholder="وصف المنتج"></textarea></div>
                 <div class="form-group"><input type="file" id="ad-img" accept="image/*" required></div>
                 
-                <!-- Admin Only Option -->
-                <div id="admin-options" style="display: none; background: #fef3c7; padding: 10px; border-radius: 6px;">
-                    <label style="margin:0;"><input type="checkbox" id="ad-is-admin"> إعلان بانر (سلايدر)</label>
+                <div id="admin-options" style="display: none; background: #fffbeb; padding: 10px; border-radius: 8px; border: 1px solid #fcd34d;">
+                    <label style="margin:0; cursor: pointer;"><input type="checkbox" id="ad-is-admin"> نشر كبانر إعلاني (سلايدر)</label>
                 </div>
 
                 <button type="submit" class="btn-submit" id="btn-publish">نشر الإعلان</button>
@@ -297,7 +307,7 @@
 
     <div id="toast">رسالة</div>
 
-    <!-- Firebase SDK -->
+    <!-- Firebase Code -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
@@ -313,111 +323,131 @@
             appId: "1:932777870241:web:78b0cf3a3cf14046be01e0"
         };
 
-        // Initialize
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
         const storage = getStorage(app);
 
-        // State
         let currentUser = null;
-        let allAds = [];
+        let allAds = []; // مخزن الإعلانات
+        let selectedCategory = 'all'; // الفلترة الحالية
         let isAdmin = false;
 
-        // Admin Credentials Hardcoded Mapping
         const ADMIN_USER = "admin";
         const ADMIN_PASS = "abobob123";
-        const ADMIN_EMAIL_MAPPED = "admin@elaffroun.com"; // الإيميل الذي سيسجل في فايربيس
+        const ADMIN_EMAIL = "admin@elaffroun.com";
 
-        // ================= UI Helpers =================
-        window.showLanding = () => {
-            document.getElementById('landing-page').style.display = 'flex';
-            document.getElementById('main-app').style.display = 'none';
-        }
-        window.showApp = () => {
-            document.getElementById('landing-page').style.display = 'none';
-            document.getElementById('main-app').style.display = 'block';
-            fetchAds();
-        }
-        window.openModal = (id) => document.getElementById(id).style.display = 'flex';
-        window.closeModal = (id) => document.getElementById(id).style.display = 'none';
-        
+        // ================= Helpers =================
         function showToast(msg) {
             const t = document.getElementById('toast');
             t.innerText = msg; t.className = "show";
             setTimeout(() => t.className = t.className.replace("show", ""), 3000);
         }
 
-        // ================= Auth Logic (Unified) =================
-        let isLogin = true;
-        window.toggleAuth = () => {
-            isLogin = !isLogin;
-            const title = document.getElementById('auth-title');
-            const regFields = document.getElementById('reg-fields');
-            const btn = document.querySelector('#auth-form button');
-            const toggleTxt = document.getElementById('auth-toggle-text');
+        window.showLanding = () => {
+            document.getElementById('landing-page').style.display = 'flex';
+            document.getElementById('main-app').style.display = 'none';
+        }
 
-            if (!isLogin) {
-                title.innerText = "إنشاء حساب";
-                regFields.style.display = "block";
-                btn.innerText = "تسجيل";
-                toggleTxt.innerText = "لديك حساب؟ سجل دخول";
+        window.showApp = () => {
+            document.getElementById('landing-page').style.display = 'none';
+            document.getElementById('main-app').style.display = 'block';
+            fetchAds(true); // True means shuffle
+        }
+
+        window.openModal = (id) => document.getElementById(id).style.display = 'flex';
+        window.closeModal = (id) => document.getElementById(id).style.display = 'none';
+
+        // ================= Drawer Logic =================
+        window.toggleDrawer = (show) => {
+            const drawer = document.getElementById('filter-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            if(show) {
+                drawer.classList.add('open');
+                overlay.classList.add('show');
             } else {
-                title.innerText = "تسجيل دخول";
-                regFields.style.display = "none";
-                btn.innerText = "دخول";
-                toggleTxt.innerText = "ليس لديك حساب؟ سجل الآن";
+                drawer.classList.remove('open');
+                overlay.classList.remove('show');
             }
         }
 
-        document.getElementById('auth-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            let emailInput = document.getElementById('auth-email').value.trim();
-            const passInput = document.getElementById('auth-pass').value;
+        window.selectCat = (cat, el) => {
+            document.querySelectorAll('.category-item').forEach(e => e.classList.remove('active'));
+            el.classList.add('active');
+            selectedCategory = cat;
+        }
 
-            // منطق الأدمن الخاص
-            if (emailInput === ADMIN_USER && passInput === ADMIN_PASS) {
-                emailInput = ADMIN_EMAIL_MAPPED; // تحويل اسم المستخدم "admin" إلى إيميل صالح
+        window.applyFilters = () => {
+            // Apply Logic
+            const min = document.getElementById('price-min').value;
+            const max = document.getElementById('price-max').value;
+            
+            let filtered = allAds;
+            
+            // Category
+            if(selectedCategory !== 'all') {
+                filtered = filtered.filter(a => a.category === selectedCategory);
             }
 
+            // Price
+            if(min) filtered = filtered.filter(a => a.price >= min);
+            if(max) filtered = filtered.filter(a => a.price <= max);
+
+            renderAds(filtered);
+            toggleDrawer(false); // Close drawer
+            showToast("تم تطبيق الفلترة");
+        }
+
+        // ================= Shuffle Logic =================
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // ================= Auth =================
+        document.getElementById('auth-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            let email = document.getElementById('auth-email').value;
+            const pass = document.getElementById('auth-pass').value;
+
+            if(email === ADMIN_USER && pass === ADMIN_PASS) email = ADMIN_EMAIL;
+
             try {
-                if (isLogin) {
-                    await signInWithEmailAndPassword(auth, emailInput, passInput);
-                    showToast("تم الدخول بنجاح");
-                } else {
-                    await createUserWithEmailAndPassword(auth, emailInput, passInput);
-                    showToast("تم إنشاء الحساب");
-                }
+                await signInWithEmailAndPassword(auth, email, pass);
+                showToast("تم الدخول بنجاح");
                 closeModal('auth-modal');
                 showApp();
-            } catch (err) {
-                console.error(err);
-                // محاولة إنشاء حساب الأدمن تلقائياً إذا لم يكن موجوداً
-                if (emailInput === ADMIN_EMAIL_MAPPED && (err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential')) {
+            } catch(err) {
+                if(email === ADMIN_EMAIL && (err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential')) {
                     try {
-                        await createUserWithEmailAndPassword(auth, ADMIN_EMAIL_MAPPED, ADMIN_PASS);
-                        showToast("تم تفعيل حساب الأدمن لأول مرة!");
+                        await createUserWithEmailAndPassword(auth, ADMIN_EMAIL, ADMIN_PASS);
+                        showToast("تم إنشاء حساب الأدمن");
                         closeModal('auth-modal');
                         showApp();
-                        return;
-                    } catch (e) {}
+                    } catch(e) {}
+                } else {
+                    // Try normal user create if fail login
+                    try {
+                         await createUserWithEmailAndPassword(auth, email, pass);
+                         showToast("تم إنشاء حساب جديد");
+                         closeModal('auth-modal');
+                         showApp();
+                    } catch(regErr) {
+                         showToast("خطأ في الدخول");
+                    }
                 }
-                showToast("خطأ في البيانات: " + err.code);
             }
         });
 
         onAuthStateChanged(auth, (user) => {
             currentUser = user;
-            if (user) {
+            if(user) {
                 document.getElementById('login-btn').style.display = 'none';
                 document.getElementById('logout-btn').style.display = 'inline-block';
-                // التحقق هل هو الأدمن؟
-                if (user.email === ADMIN_EMAIL_MAPPED) {
-                    isAdmin = true;
-                    showToast("أهلاً بالمدير");
-                } else {
-                    isAdmin = false;
-                }
+                isAdmin = (user.email === ADMIN_EMAIL);
             } else {
                 document.getElementById('login-btn').style.display = 'inline-block';
                 document.getElementById('logout-btn').style.display = 'none';
@@ -429,132 +459,129 @@
             signOut(auth).then(() => { showToast("تم الخروج"); showLanding(); });
         }
 
-        // ================= Ads Logic (Fixed Upload) =================
-        async function uploadImageToStorage(file) {
-            if (!file) return null;
-            // اسم ملف فريد
-            const fileName = `ads/${Date.now()}_${file.name}`;
-            const storageRef = ref(storage, fileName);
-            
-            // رفع الملف
-            const snapshot = await uploadBytes(storageRef, file);
-            // الحصول على الرابط
-            return await getDownloadURL(snapshot.ref);
+        // ================= Ads Ops =================
+        window.openAddModal = () => {
+            if(!currentUser) { showToast("سجل دخولك أولاً"); openModal('auth-modal'); return; }
+            openModal('add-modal');
+            document.getElementById('admin-options').style.display = isAdmin ? 'block' : 'none';
         }
 
-        window.openAddModal = () => {
-            if (!currentUser) { showToast("يجب تسجيل الدخول أولاً"); openModal('auth-modal'); return; }
-            openModal('add-modal');
-            // خيار بانر الأدمن
-            if (isAdmin) document.getElementById('admin-options').style.display = 'block';
-            else document.getElementById('admin-options').style.display = 'none';
+        async function uploadImage(file) {
+            const storageRef = ref(storage, `ads/${Date.now()}_${file.name}`);
+            await uploadBytes(storageRef, file);
+            return await getDownloadURL(storageRef);
         }
 
         document.getElementById('add-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('btn-publish');
+            btn.disabled = true; btn.innerText = "جاري النشر...";
             
-            // قفل الزر لمنع التكرار
-            btn.disabled = true;
-            btn.innerText = "جاري رفع الصورة والنشر...";
-
             try {
-                // 1. جمع البيانات
-                const cat = document.getElementById('ad-cat').value;
                 const title = document.getElementById('ad-title').value;
                 const price = Number(document.getElementById('ad-price').value);
+                const cat = document.getElementById('ad-cat').value;
                 const wilaya = document.getElementById('ad-wilaya').value;
                 const phone = document.getElementById('ad-phone').value;
                 const desc = document.getElementById('ad-desc').value;
                 const file = document.getElementById('ad-img').files[0];
                 const isAdminAd = document.getElementById('ad-is-admin').checked;
 
-                // 2. رفع الصورة
-                const imageUrl = await uploadImageToStorage(file);
+                const url = await uploadImage(file);
 
-                // 3. الحفظ في القاعدة
                 await addDoc(collection(db, "ads"), {
                     title, price, category: cat, wilaya, phone, description: desc,
-                    imageUrl: imageUrl,
-                    userId: currentUser.uid,
-                    createdAt: serverTimestamp(),
-                    isAdminAd: (isAdmin && isAdminAd), // فقط الأدمن يمكنه جعلها بانر
-                    isFeatured: false
+                    imageUrl: url, userId: currentUser.uid, createdAt: serverTimestamp(),
+                    isAdminAd: (isAdmin && isAdminAd), isFeatured: false
                 });
 
-                // 4. نجاح
-                showToast("تم نشر الإعلان بنجاح!");
+                showToast("تم النشر بنجاح!");
                 closeModal('add-modal');
                 document.getElementById('add-form').reset();
-                fetchAds();
+                fetchAds(false); // Reload without full shuffle
 
-            } catch (err) {
-                console.error("Error adding document: ", err);
-                alert("حدث خطأ أثناء النشر: " + err.message); // تنبيه للمستخدم
+            } catch(err) {
+                alert("خطأ: " + err.message);
             } finally {
-                // إعادة تفعيل الزر مهما كانت النتيجة
-                btn.disabled = false;
-                btn.innerText = "نشر الإعلان";
+                btn.disabled = false; btn.innerText = "نشر الإعلان";
             }
         });
 
-        // ================= Fetch & Display =================
-        async function fetchAds() {
+        // ================= Fetching =================
+        async function fetchAds(shouldShuffle = false) {
             const container = document.getElementById('ads-container');
             const slider = document.getElementById('admin-slider');
             
             try {
                 const q = query(collection(db, "ads"), orderBy("createdAt", "desc"));
-                const snapshot = await getDocs(q);
+                const snap = await getDocs(q);
                 
                 allAds = [];
-                snapshot.forEach(doc => allAds.push({ id: doc.id, ...doc.data() }));
+                snap.forEach(d => allAds.push({ id: d.id, ...d.data() }));
 
-                renderAds(allAds);
-                renderSlider(allAds);
+                // Render Slider
+                const banners = allAds.filter(a => a.isAdminAd);
+                if(banners.length > 0) {
+                    slider.style.display = "block";
+                    let html = "";
+                    banners.forEach((b, i) => {
+                        html += `
+                            <div class="slide ${i===0?'active':''}">
+                                <img src="${b.imageUrl}">
+                                <div class="slide-content"><h2>${b.title}</h2></div>
+                            </div>`;
+                    });
+                    slider.innerHTML = html;
+                    startSlider();
+                } else {
+                    slider.style.display = "none";
+                }
 
-            } catch (err) {
+                // Render Grid (Shuffle if requested)
+                let displayAds = allAds.filter(a => !a.isAdminAd);
+                if(shouldShuffle) {
+                    displayAds = shuffleArray([...displayAds]);
+                }
+                
+                renderAds(displayAds);
+
+            } catch(err) {
                 console.error(err);
-                container.innerHTML = "<p>فشل في تحميل الإعلانات</p>";
+                container.innerHTML = "<p>فشل تحميل البيانات</p>";
             }
         }
 
         function renderAds(list) {
             const container = document.getElementById('ads-container');
             container.innerHTML = "";
-            
-            // استبعاد بانرات الأدمن من القائمة العادية (اختياري)
-            const normalAds = list.filter(ad => !ad.isAdminAd);
-
-            if (normalAds.length === 0) {
-                container.innerHTML = "<p style='grid-column:1/-1; text-align:center;'>لا توجد إعلانات</p>";
+            if(list.length === 0) {
+                container.innerHTML = "<p style='grid-column:1/-1; text-align:center;'>لا توجد نتائج</p>";
                 return;
             }
 
-            normalAds.forEach(ad => {
+            list.forEach(ad => {
                 let adminBtns = "";
-                if (isAdmin) {
+                if(isAdmin) {
                     adminBtns = `
                         <div class="admin-controls">
-                            <button class="btn-mini btn-del" onclick="delAd('${ad.id}')">حذف</button>
-                            <button class="btn-mini btn-star" onclick="featAd('${ad.id}', ${!ad.isFeatured})">
-                                ${ad.isFeatured ? 'إلغاء' : 'تمييز'}
-                            </button>
+                            <button class="btn-mini btn-del" onclick="delAd('${ad.id}')"><i class="fas fa-trash"></i></button>
+                            <button class="btn-mini btn-star" onclick="featAd('${ad.id}', ${!ad.isFeatured})"><i class="fas fa-star"></i></button>
                         </div>
                     `;
                 }
-                const badge = ad.isFeatured ? `<span class="featured-badge">مميز ⭐</span>` : '';
+
+                const badge = ad.isFeatured ? `<span class="featured-badge">مميز</span>` : '';
 
                 const html = `
                     <div class="ad-card">
                         ${badge}
                         <img src="${ad.imageUrl}" class="ad-img" loading="lazy">
                         <div class="ad-body">
-                            <div class="ad-price">${ad.price} DZD</div>
+                            <div class="ad-price">${ad.price.toLocaleString()} DZD</div>
                             <h4 class="ad-title">${ad.title}</h4>
                             <div class="ad-meta">
-                                <span>${ad.wilaya}</span>
-                                <span>${ad.category}</span>
+                                <span><i class="fas fa-tag"></i> ${ad.category}</span>
+                                <span><i class="fas fa-map-marker-alt"></i> ${ad.wilaya}</span>
                             </div>
                             ${adminBtns}
                         </div>
@@ -564,62 +591,23 @@
             });
         }
 
-        function renderSlider(list) {
-            const slider = document.getElementById('admin-slider');
-            const banners = list.filter(ad => ad.isAdminAd);
-
-            if (banners.length > 0) {
-                slider.style.display = "block";
-                let html = "";
-                banners.forEach((b, i) => {
-                    html += `<div class="slide ${i===0?'active':''}"><img src="${b.imageUrl}"></div>`;
-                });
-                slider.innerHTML = html;
-                startSlideShow();
-            } else {
-                slider.style.display = "none";
-            }
-        }
-
-        function startSlideShow() {
+        function startSlider() {
             let slides = document.querySelectorAll('.slide');
             let i = 0;
-            if (slides.length < 2) return;
+            if(slides.length < 2) return;
             setInterval(() => {
                 slides[i].classList.remove('active');
-                i = (i + 1) % slides.length;
+                i = (i+1) % slides.length;
                 slides[i].classList.add('active');
-            }, 3000);
-        }
-
-        // ================= Filters =================
-        window.filterCat = (cat, el) => {
-            document.querySelectorAll('.category-item').forEach(e => e.classList.remove('active'));
-            el.classList.add('active');
-            if (cat === 'all') renderAds(allAds);
-            else renderAds(allAds.filter(a => a.category === cat));
-        }
-
-        window.filterByPrice = () => {
-            const min = document.getElementById('price-min').value;
-            const max = document.getElementById('price-max').value;
-            let res = allAds;
-            if (min) res = res.filter(a => a.price >= min);
-            if (max) res = res.filter(a => a.price <= max);
-            renderAds(res);
+            }, 3500);
         }
 
         // ================= Admin Actions =================
-        // يجب ربط الدوال بالنافذة لأننا داخل module
         window.delAd = async (id) => {
-            if (confirm("حذف الإعلان؟")) {
-                await deleteDoc(doc(db, "ads", id));
-                fetchAds();
-            }
+            if(confirm("حذف؟")) { await deleteDoc(doc(db, "ads", id)); fetchAds(false); }
         }
-        window.featAd = async (id, status) => {
-            await updateDoc(doc(db, "ads", id), { isFeatured: status });
-            fetchAds();
+        window.featAd = async (id, s) => {
+            await updateDoc(doc(db, "ads", id), { isFeatured: s }); fetchAds(false);
         }
 
     </script>
