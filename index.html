@@ -4,203 +4,214 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>العفرون أونلاين | El Affroun Online</title>
-    <!-- خط كايرو لدعم العربية بشكل جميل -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- أيقونات FontAwesome -->
+    <!-- خطوط عربية وأيقونات -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ==================== 1. General Styles ==================== */
+        /* ==================== 1. تنسيقات عامة ==================== */
         :root {
-            --primary: #f26522; /* لون شبيه بواد كنيس (برتقالي) */
-            --secondary: #003d7a; /* أزرق داكن */
-            --bg-light: #f4f6f8;
+            --primary: #ff6600; /* برتقالي حيوي */
+            --secondary: #1a237e; /* أزرق داكن */
+            --bg-light: #f8f9fa;
             --white: #ffffff;
-            --text-dark: #333;
-            --text-gray: #666;
-            --shadow: 0 4px 6px rgba(0,0,0,0.1);
-            --transition: 0.3s ease;
+            --dark: #212529;
+            --gray: #6c757d;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease-in-out;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
-        body { background-color: var(--bg-light); color: var(--text-dark); overflow-x: hidden; }
-        a { text-decoration: none; color: inherit; }
+        body { background-color: var(--bg-light); color: var(--dark); overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
         ul { list-style: none; }
         button, input, select, textarea { outline: none; border: none; font-family: inherit; }
         
-        /* أدوات مساعدة */
-        .hidden { display: none !important; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
-        .btn { padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: var(--transition); font-weight: 600; }
-        .btn-primary { background-color: var(--primary); color: white; }
-        .btn-primary:hover { background-color: #d94e0d; }
+        .hidden { display: none !important; }
+        
+        /* أزرار */
+        .btn { padding: 10px 25px; border-radius: 8px; cursor: pointer; font-weight: 700; transition: var(--transition); display: inline-block; }
+        .btn-primary { background-color: var(--primary); color: white; box-shadow: 0 4px 10px rgba(255, 102, 0, 0.3); }
+        .btn-primary:hover { background-color: #e65c00; transform: translateY(-2px); }
         .btn-secondary { background-color: var(--secondary); color: white; }
-        .btn-secondary:hover { background-color: #002a55; }
-        .btn-outline { border: 1px solid var(--secondary); color: var(--secondary); background: transparent; }
+        .btn-outline { border: 2px solid var(--secondary); color: var(--secondary); background: transparent; }
+        .btn-outline:hover { background: var(--secondary); color: white; }
 
-        /* ==================== 2. Navbar ==================== */
-        header { background-color: var(--white); box-shadow: var(--shadow); position: sticky; top: 0; z-index: 1000; }
-        .nav-content { display: flex; justify-content: space-between; align-items: center; height: 70px; }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--secondary); }
-        .logo span { color: var(--primary); }
+        /* ==================== 2. الهيدر (Navbar) ==================== */
+        header { background-color: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; height: 70px; }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; height: 100%; }
+        
+        .logo { display: flex; flex-direction: column; line-height: 1.2; }
+        .logo-ar { font-size: 1.4rem; font-weight: 900; color: var(--secondary); }
+        .logo-fr { font-size: 0.9rem; font-weight: 600; color: var(--primary); letter-spacing: 1px; text-transform: uppercase; }
+        
         .nav-links { display: flex; gap: 20px; align-items: center; }
-        .nav-links a { font-weight: 600; color: var(--text-dark); transition: var(--transition); cursor: pointer; }
-        .nav-links a:hover { color: var(--primary); }
+        .nav-item { font-weight: 600; color: var(--dark); cursor: pointer; position: relative; }
+        .nav-item::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; right: 0; background: var(--primary); transition: var(--transition); }
+        .nav-item:hover::after { width: 100%; }
 
-        /* ==================== 3. Hero Section ==================== */
+        /* ==================== 3. الواجهة الرئيسية (Hero) ==================== */
         .hero { 
             position: relative; 
-            height: 90vh; 
-            overflow: hidden; 
+            height: 85vh; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             text-align: center;
             color: white;
+            overflow: hidden;
         }
         .hero-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1472851294608-41531268f719?q=80&w=2070&auto=format&fit=crop');
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            /* صورة خلفية متجر احترافية */
+            background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
             z-index: -1;
-            animation: zoomEffect 20s infinite alternate;
+            filter: brightness(0.4);
+            animation: kenBurns 20s infinite alternate;
         }
-        .hero-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5); z-index: -1;
-        }
-        @keyframes zoomEffect {
+        @keyframes kenBurns {
             0% { transform: scale(1); }
-            100% { transform: scale(1.2); }
+            100% { transform: scale(1.15); }
         }
-        .hero h1 { font-size: 3rem; margin-bottom: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .hero p { font-size: 1.2rem; margin-bottom: 30px; }
+        .hero-content h1 { font-size: 3.5rem; margin-bottom: 10px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .hero-content p { font-size: 1.5rem; margin-bottom: 30px; font-weight: 300; opacity: 0.9; }
         .hero-btn { 
-            padding: 15px 40px; font-size: 1.2rem; background: var(--primary); color: white; 
-            border-radius: 50px; cursor: pointer; transition: 0.3s;
+            padding: 15px 50px; font-size: 1.2rem; background: var(--primary); color: white; border: none;
+            border-radius: 50px; cursor: pointer; transition: var(--transition); box-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
         }
-        .hero-btn:hover { transform: translateY(-5px); background: #d94e0d; }
+        .hero-btn:hover { transform: scale(1.05); background: #ff7b00; }
 
-        /* ==================== 4. Ads Area ==================== */
-        #market-section { padding: 40px 0; }
-        
-        /* Banner Ads */
-        .top-banner { 
-            width: 100%; height: 120px; background-color: #ddd; margin-bottom: 20px; 
-            border-radius: 8px; overflow: hidden; position: relative; display: none;
-        }
+        /* ==================== 4. قسم المنتجات (Market) ==================== */
+        #market-section { padding: 50px 0; min-height: 60vh; flex: 1; }
+        .section-title { text-align: center; margin-bottom: 40px; color: var(--secondary); font-size: 2rem; font-weight: 700; position: relative; display: inline-block; left: 50%; transform: translateX(-50%); }
+        .section-title::before { content: ''; position: absolute; bottom: -10px; width: 60%; height: 4px; background: var(--primary); border-radius: 2px; left: 20%; }
+
+        /* بانر إعلاني */
+        .top-banner { width: 100%; height: 150px; border-radius: 12px; overflow: hidden; margin-bottom: 30px; display: none; box-shadow: var(--shadow); }
         .top-banner img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Grid Layout */
-        .ads-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
-            gap: 20px; 
-        }
+        /* شبكة المنتجات */
+        .ads-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
 
-        /* Ad Card */
+        /* بطاقة المنتج */
         .ad-card {
-            background: white; border-radius: 8px; overflow: hidden;
-            box-shadow: var(--shadow); transition: var(--transition);
-            position: relative;
+            background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow);
+            transition: var(--transition); position: relative; border: 1px solid #eee;
         }
-        .ad-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.15); }
-        .ad-image { height: 180px; width: 100%; overflow: hidden; }
-        .ad-image img { width: 100%; height: 100%; object-fit: cover; }
-        .ad-content { padding: 15px; }
-        .ad-price { color: var(--primary); font-weight: 700; font-size: 1.1rem; }
-        .ad-title { font-size: 1rem; margin: 5px 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .ad-meta { font-size: 0.8rem; color: var(--text-gray); display: flex; justify-content: space-between; margin-top: 10px; }
-        .ad-featured-badge {
-            position: absolute; top: 10px; right: 10px; background: #ffc107; color: #000;
-            padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .featured-card { border: 2px solid #ffc107; }
-
-        /* ==================== 5. Floating Buttons ==================== */
-        .fab-container { position: fixed; bottom: 30px; left: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 900; }
-        .fab {
-            width: 50px; height: 50px; border-radius: 50%; border: none;
-            display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 1.2rem; cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: 0.3s;
-        }
-        .fab-add { background-color: var(--primary); }
-        .fab-filter { background-color: var(--secondary); }
-        .fab:hover { transform: scale(1.1); }
+        .ad-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+        .ad-image { height: 200px; width: 100%; overflow: hidden; position: relative; }
+        .ad-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .ad-card:hover .ad-image img { transform: scale(1.1); }
         
-        /* ==================== 6. Modals ==================== */
+        .ad-badge { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.6); color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; backdrop-filter: blur(4px); }
+        .featured-badge { background: #ffc107; color: #000; font-weight: bold; top: 10px; left: 10px; right: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        
+        .ad-content { padding: 15px; }
+        .ad-price { color: var(--primary); font-size: 1.2rem; font-weight: 800; margin-bottom: 5px; }
+        .ad-title { font-size: 1.1rem; font-weight: 700; color: var(--dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 8px; }
+        .ad-footer { display: flex; justify-content: space-between; align-items: center; color: var(--gray); font-size: 0.85rem; border-top: 1px solid #f0f0f0; padding-top: 10px; margin-top: 10px; }
+
+        /* ==================== 5. الأزرار العائمة (FAB) ==================== */
+        .fab-container { position: fixed; bottom: 80px; left: 20px; display: flex; flex-direction: column; gap: 15px; z-index: 900; }
+        .fab {
+            width: 55px; height: 55px; border-radius: 50%; border: none;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.4rem; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: var(--transition);
+        }
+        .fab-add { background: linear-gradient(45deg, var(--primary), #ff9100); }
+        .fab-search { background: linear-gradient(45deg, var(--secondary), #3949ab); }
+        .fab-filter { background: #455a64; width: 45px; height: 45px; font-size: 1rem; }
+        .fab:hover { transform: scale(1.1) rotate(5deg); }
+        
+        /* ==================== 6. الفوتر (Footer) ==================== */
+        footer { background-color: #111; color: #aaa; padding: 40px 0 20px; margin-top: auto; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px; }
+        .footer-col h4 { color: white; margin-bottom: 20px; font-size: 1.1rem; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a:hover { color: var(--primary); }
+        .footer-bottom { border-top: 1px solid #333; padding-top: 20px; text-align: center; font-size: 0.9rem; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .admin-lock { color: #222; cursor: pointer; transition: 0.3s; }
+        .admin-lock:hover { color: #444; }
+
+        /* ==================== 7. النوافذ المنبثقة (Modals) ==================== */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); z-index: 2000;
+            background: rgba(0,0,0,0.8); z-index: 2000;
             display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none; transition: 0.3s;
+            opacity: 0; pointer-events: none; transition: 0.3s; backdrop-filter: blur(5px);
         }
         .modal.active { opacity: 1; pointer-events: all; }
         .modal-content {
-            background: white; width: 90%; max-width: 500px; padding: 25px;
-            border-radius: 10px; position: relative; max-height: 90vh; overflow-y: auto;
+            background: white; width: 95%; max-width: 500px; padding: 30px;
+            border-radius: 15px; position: relative; max-height: 90vh; overflow-y: auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3); animation: slideUp 0.3s ease;
         }
-        .close-modal { position: absolute; top: 15px; left: 15px; font-size: 1.2rem; cursor: pointer; color: #999; }
+        @keyframes slideUp { from { transform: translateY(50px); } to { transform: translateY(0); } }
         
+        .close-modal { position: absolute; top: 20px; left: 20px; font-size: 1.5rem; cursor: pointer; color: #999; }
         .form-group { margin-bottom: 15px; text-align: right; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 700; font-size: 0.9rem; color: var(--secondary); }
         .form-control {
-            width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;
-            font-size: 1rem; transition: 0.3s;
+            width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 8px;
+            font-size: 1rem; transition: 0.3s; background: #f9f9f9;
         }
-        .form-control:focus { border-color: var(--primary); }
-        
-        /* Filter Modal specifics */
-        .filter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
-        /* Admin Controls */
-        .admin-controls { margin-top: 10px; border-top: 1px solid #eee; padding-top: 5px; display: flex; gap: 5px; }
-        .btn-sm { font-size: 0.7rem; padding: 5px 8px; }
+        .form-control:focus { border-color: var(--primary); background: white; }
 
         /* Loader */
-        .loader {
+        .loader-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.8); display: flex; align-items: center; justify-content: center;
+            z-index: 10; border-radius: 15px;
+        }
+        .spinner {
             border: 4px solid #f3f3f3; border-top: 4px solid var(--primary);
-            border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite;
-            margin: 20px auto; display: none;
+            border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* رسائل التنبيه */
+        /* Toast Messages */
         .toast {
-            position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
-            background: #333; color: white; padding: 10px 20px; border-radius: 5px;
-            z-index: 3000; font-size: 0.9rem; display: none;
+            position: fixed; top: 90px; left: 50%; transform: translateX(-50%);
+            background: #333; color: white; padding: 12px 25px; border-radius: 30px;
+            z-index: 3000; font-weight: 600; display: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-        .toast.success { background: #28a745; }
-        .toast.error { background: #dc3545; }
+        .toast.success { background: #00c853; }
+        .toast.error { background: #d50000; }
+
+        /* Admin Controls */
+        .admin-controls { display: flex; gap: 5px; margin-top: 10px; }
+        .btn-sm { padding: 5px 10px; font-size: 0.8rem; border-radius: 4px; color: white; cursor: pointer; }
+        .btn-del { background: #d32f2f; }
+        .btn-feat { background: #fbc02d; color: black; }
 
     </style>
 </head>
 <body>
 
-    <!-- رسائل التنبيه -->
-    <div id="toast" class="toast">تمت العملية بنجاح</div>
+    <div id="toast" class="toast"></div>
 
     <!-- Header -->
     <header>
         <div class="container nav-content">
             <div class="logo">
-                El Affroun <span>Online</span>
+                <span class="logo-ar">العفرون أونلاين</span>
+                <span class="logo-fr">El Affroun Online</span>
             </div>
             <nav class="nav-links">
-                <a href="#" onclick="showSection('hero')">الرئيسية</a>
+                <a class="nav-item" onclick="showAllProducts()">الرئيسية</a>
+                
                 <div id="auth-buttons">
-                    <a href="#" onclick="openModal('loginModal')"><i class="fas fa-user"></i> دخول</a>
+                    <button class="btn btn-outline" onclick="openModal('loginModal')"><i class="fas fa-sign-in-alt"></i> دخول</button>
                 </div>
-                <div id="user-menu" class="hidden" style="display: flex; gap: 15px; align-items: center;">
-                    <span id="user-name" style="font-size: 0.9rem;"></span>
-                    <a href="#" onclick="logoutUser()" style="color:red"><i class="fas fa-sign-out-alt"></i> خروج</a>
+                
+                <div id="user-menu" class="hidden" style="display: flex; gap: 10px; align-items: center;">
+                    <span id="user-name" style="font-weight:bold; color:var(--primary)"></span>
+                    <button class="btn btn-outline" style="border-color: #d32f2f; color: #d32f2f;" onclick="logoutUser()">خروج</button>
                 </div>
-                <a href="#market-section" onclick="showMarket()"><i class="fas fa-search"></i> بحث</a>
             </nav>
         </div>
     </header>
@@ -208,60 +219,111 @@
     <!-- Hero Section -->
     <section id="hero" class="hero">
         <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1>العفرون أونلاين <br> <span style="font-size: 1.5rem; font-weight: 300;">El Affroun Online</span></h1>
-            <p>بيع وشراء المنتجات بسهولة في منطقتك</p>
-            <button class="hero-btn" onclick="showMarket()">ابدأ الآن <i class="fas fa-arrow-left"></i></button>
+            <h1>مرحباً بك في العفرون أونلاين</h1>
+            <p>أفضل منصة للبيع والشراء في المنطقة | Vente et Achat à El Affroun</p>
+            <button class="hero-btn" onclick="showAllProducts()">تصفح المنتجات الآن</button>
         </div>
     </section>
 
-    <!-- Market Section (Hidden initially) -->
+    <!-- Market Section -->
     <section id="market-section" class="container hidden">
-        
-        <!-- Banner Ad (Admin) -->
+        <!-- Banner Ad -->
         <div id="top-banner" class="top-banner">
-            <a href="#" id="banner-link" target="_blank">
-                <img id="banner-img" src="" alt="Advertisement">
-            </a>
+            <a href="#" id="banner-link" target="_blank"><img id="banner-img" src="" alt="Ads"></a>
         </div>
 
-        <h2 style="margin-bottom: 20px; color: var(--secondary);">أحدث الإعلانات</h2>
+        <h2 class="section-title">المعروضات</h2>
         
-        <!-- Loader -->
-        <div id="loader" class="loader"></div>
+        <div id="global-loader" style="text-align: center; padding: 20px; display: none;">
+            <div class="spinner" style="margin: 0 auto;"></div>
+            <p style="margin-top: 10px; color: #666;">جاري التحميل...</p>
+        </div>
 
-        <!-- Grid -->
         <div id="ads-container" class="ads-grid">
-            <!-- سيتم حقن الإعلانات هنا بواسطة JS -->
+            <!-- Ads injected here -->
         </div>
     </section>
 
-    <!-- Floating Buttons -->
-    <div class="fab-container hidden" id="fab-actions">
-        <button class="fab fab-filter" onclick="openModal('filterModal')" title="فلترة"><i class="fas fa-filter"></i></button>
-        <button class="fab fab-add" onclick="checkAuthAndOpenAdd()" title="نشر إعلان"><i class="fas fa-plus"></i></button>
+    <!-- Floating Buttons (Always Visible) -->
+    <div class="fab-container">
+        <button class="fab fab-add" onclick="checkAuthAndOpenAdd()" title="نشر إعلان">
+            <i class="fas fa-plus"></i>
+        </button>
+        <button class="fab fab-search" onclick="openModal('filterModal')" title="بحث وفلترة">
+            <i class="fas fa-search"></i>
+        </button>
     </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>عن الموقع</h4>
+                    <p style="font-size: 0.9rem; line-height: 1.6;">العفرون أونلاين هو دليلك الأول للبيع والشراء في المنطقة. نهدف لتسهيل التواصل بين البائع والمشتري.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>روابط هامة</h4>
+                    <ul>
+                        <li><a href="#">من نحن</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                        <li><a href="#">شروط الاستخدام</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>تواصل معنا</h4>
+                    <ul>
+                        <li><a href="#">اتصل بنا</a></li>
+                        <li><a href="#">الإبلاغ عن مشكلة</a></li>
+                        <li><a href="#">موقعنا</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 El Affroun Online. جميع الحقوق محفوظة.</p>
+                <!-- قفل الأدمن السري -->
+                <i class="fas fa-lock admin-lock" onclick="openModal('adminLoginModal')" title="."></i>
+            </div>
+        </div>
+    </footer>
 
     <!-- ==================== Modals ==================== -->
 
-    <!-- Login Modal -->
+    <!-- Admin Login Modal (Secret) -->
+    <div id="adminLoginModal" class="modal">
+        <div class="modal-content" style="max-width: 350px;">
+            <span class="close-modal" onclick="closeModal('adminLoginModal')">&times;</span>
+            <h3 style="text-align: center; margin-bottom: 15px;">Admin Area</h3>
+            <form id="adminForm">
+                <div class="form-group">
+                    <input type="text" id="admin-user" class="form-control" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="admin-pass" class="form-control" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Access</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Login Modal -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('loginModal')">&times;</span>
             <h3 style="text-align: center; margin-bottom: 20px;">تسجيل الدخول</h3>
             <form id="loginForm">
                 <div class="form-group">
-                    <label>البريد الإلكتروني / Email</label>
-                    <input type="email" id="login-email" class="form-control" placeholder="user@example.com" required>
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="login-email" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label>كلمة المرور / Password</label>
-                    <input type="password" id="login-password" class="form-control" placeholder="******" required>
+                    <label>كلمة المرور</label>
+                    <input type="password" id="login-password" class="form-control" required>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">دخول</button>
-                <p style="text-align: center; margin-top: 15px; font-size: 0.9rem;">
-                    ليس لديك حساب؟ <a href="#" onclick="closeModal('loginModal'); openModal('signupModal')" style="color: var(--primary);">أنشئ حساباً</a>
+                <p style="text-align: center; margin-top: 15px;">
+                    لا تملك حساباً؟ <a href="#" onclick="closeModal('loginModal'); openModal('signupModal')" style="color: var(--primary);">أنشئ حساباً</a>
                 </p>
             </form>
         </div>
@@ -283,15 +345,11 @@
                 </div>
                 <div class="form-group">
                     <label>رقم الهاتف</label>
-                    <input type="text" id="reg-phone" class="form-control" required>
+                    <input type="number" id="reg-phone" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>كلمة المرور</label>
                     <input type="password" id="reg-pass" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>تأكيد كلمة المرور</label>
-                    <input type="password" id="reg-confirm-pass" class="form-control" required>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">تسجيل</button>
             </form>
@@ -301,13 +359,28 @@
     <!-- Add Ad Modal -->
     <div id="addAdModal" class="modal">
         <div class="modal-content">
+            <!-- Loading Overlay for Upload -->
+            <div id="upload-overlay" class="loader-overlay hidden">
+                <div style="text-align: center;">
+                    <div class="spinner"></div>
+                    <p style="margin-top: 10px;">جاري نشر الإعلان...</p>
+                </div>
+            </div>
+
             <span class="close-modal" onclick="closeModal('addAdModal')">&times;</span>
-            <h3 style="text-align: center; margin-bottom: 20px;">نشر إعلان جديد</h3>
+            <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary);">إضافة إعلان جديد</h3>
             <form id="addAdForm">
+                <div class="form-group">
+                    <label>عنوان المنتج</label>
+                    <input type="text" id="ad-title" class="form-control" placeholder="مثال: سيارة للبيع" required>
+                </div>
+                <div class="form-group">
+                    <label>السعر (DZD)</label>
+                    <input type="number" id="ad-price" class="form-control" placeholder="1000" required>
+                </div>
                 <div class="form-group">
                     <label>الفئة</label>
                     <select id="ad-category" class="form-control" required>
-                        <option value="">اختر الفئة...</option>
                         <option value="vehicles">سيارات و مركبات</option>
                         <option value="real_estate">عقارات</option>
                         <option value="electronics">هواتف و إلكترونيات</option>
@@ -315,17 +388,8 @@
                         <option value="services">خدمات</option>
                         <option value="appliances">أجهزة كهرومنزلية</option>
                         <option value="fashion">ألبسة و موضة</option>
-                        <option value="professional">معدات مهنية</option>
                         <option value="others">أخرى</option>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label>العنوان</label>
-                    <input type="text" id="ad-title" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>السعر (DZD)</label>
-                    <input type="number" id="ad-price" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>المدينة</label>
@@ -351,9 +415,9 @@
                     <input type="file" id="ad-image" class="form-control" accept="image/*" required>
                 </div>
                 
-                <!-- خيارات الأدمن فقط -->
-                <div id="admin-ad-options" class="hidden" style="background: #f9f9f9; padding: 10px; border: 1px dashed red;">
-                    <label><input type="checkbox" id="is-admin-ad"> إعلان إداري (بانر/مميز)</label>
+                <!-- Admin Only Option -->
+                <div id="admin-ad-options" class="hidden" style="margin: 10px 0; padding: 10px; background: #fff3cd; border: 1px dashed orange;">
+                    <label><input type="checkbox" id="is-admin-ad"> <b>إعلان مميز / بانر (أدمن فقط)</b></label>
                 </div>
 
                 <button type="submit" class="btn btn-primary" style="width: 100%;">نشر الإعلان</button>
@@ -365,108 +429,89 @@
     <div id="filterModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('filterModal')">&times;</span>
-            <h3 style="text-align: center;">فلترة البحث</h3>
+            <h3 style="text-align: center; margin-bottom: 20px;">بحث وفلترة</h3>
+            
             <div class="form-group">
-                <label>الفئة</label>
-                <select id="filter-category" class="form-control">
-                    <option value="all">الكل</option>
-                    <option value="vehicles">سيارات و مركبات</option>
-                    <option value="real_estate">عقارات</option>
-                    <option value="electronics">هواتف و إلكترونيات</option>
-                    <option value="jobs">وظائف</option>
-                    <option value="services">خدمات</option>
-                    <option value="appliances">أجهزة كهرومنزلية</option>
-                    <option value="fashion">ألبسة و موضة</option>
-                    <option value="professional">معدات مهنية</option>
-                    <option value="others">أخرى</option>
-                </select>
+                <label>بحث بالكلمة</label>
+                <input type="text" id="search-keyword" class="form-control" placeholder="اسم المنتج...">
             </div>
-            <div class="form-group">
-                <label>المدينة</label>
-                <select id="filter-city" class="form-control">
-                    <option value="all">الكل</option>
-                    <option value="العفرون">العفرون</option>
-                    <option value="موزاية">موزاية</option>
-                    <option value="شفة">شفة</option>
-                    <option value="واد جر">واد جر</option>
-                    <option value="احمر العين">احمر العين</option>
-                    <option value="حطاطبة">حطاطبة</option>
-                </select>
-            </div>
-            <div class="filter-grid">
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                 <div class="form-group">
-                    <label>السعر الأدنى</label>
-                    <input type="number" id="filter-min-price" class="form-control" placeholder="0">
+                    <label>الفئة</label>
+                    <select id="filter-category" class="form-control">
+                        <option value="all">الكل</option>
+                        <option value="vehicles">سيارات</option>
+                        <option value="real_estate">عقارات</option>
+                        <option value="electronics">إلكترونيات</option>
+                        <option value="jobs">وظائف</option>
+                        <option value="services">خدمات</option>
+                        <option value="others">أخرى</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label>السعر الأقصى</label>
-                    <input type="number" id="filter-max-price" class="form-control" placeholder="MAX">
+                    <label>المدينة</label>
+                    <select id="filter-city" class="form-control">
+                        <option value="all">الكل</option>
+                        <option value="العفرون">العفرون</option>
+                        <option value="موزاية">موزاية</option>
+                        <option value="شفة">شفة</option>
+                        <option value="واد جر">واد جر</option>
+                        <option value="احمر العين">احمر العين</option>
+                    </select>
                 </div>
             </div>
-            <button onclick="applyFilters()" class="btn btn-secondary" style="width: 100%;">تطبيق الفلتر</button>
+            
+            <button onclick="applyFilters()" class="btn btn-primary" style="width: 100%;">إظهار النتائج</button>
         </div>
     </div>
 
-    <!-- Ad Details Modal -->
+    <!-- Details Modal -->
     <div id="detailsModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('detailsModal')">&times;</span>
-            <div id="details-content">
-                <!-- محتوى التفاصيل -->
-            </div>
+            <div id="details-content"></div>
         </div>
     </div>
 
-    <!-- ==================== JavaScript ==================== -->
+    <!-- ==================== JavaScript Logic ==================== -->
     <script type="module">
-        // Import Firebase SDKs
+        // استدعاء مكتبات Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, query, orderBy, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
 
-        // Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyAaXp-gUOQ_G2s-kM8JhaqW8TJcJ4Nqcuo",
             authDomain: "comondi-fae4b.firebaseapp.com",
             projectId: "comondi-fae4b",
             storageBucket: "comondi-fae4b.firebasestorage.app",
             messagingSenderId: "932777870241",
-            appId: "1:932777870241:web:78b0cf3a3cf14046be01e0",
-            measurementId: "G-M09RX0V18S"
+            appId: "1:932777870241:web:78b0cf3a3cf14046be01e0"
         };
 
-        // Initialize Firebase
+        // تهيئة التطبيق
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
         const auth = getAuth(app);
         const db = getFirestore(app);
         const storage = getStorage(app);
 
-        // State Management
+        // متغيرات الحالة
         let currentUser = null;
         let isAdmin = false;
-        let allAds = []; // لتخزين الإعلانات محلياً للفلترة السريعة
-        
-        // Admin Credentials Check (Simulated for this frontend-only scope)
-        // في الواقع يجب أن يكون هذا باستخدام Custom Claims في Firebase Auth
-        const ADMIN_EMAIL_CHECK = "admin@elaffroun.com"; // مثال
-        // بما أن المستخدم طلب دخول الأدمن بكلمة مرور معينة، سنقوم بالتحقق عند تسجيل الدخول
+        let allAds = [];
 
-        // ==================== Auth Functions ====================
-
+        // ==================== Authentication ====================
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
                 document.getElementById('auth-buttons').classList.add('hidden');
                 document.getElementById('user-menu').classList.remove('hidden');
-                document.getElementById('user-menu').style.display = 'flex';
                 document.getElementById('user-name').innerText = user.email.split('@')[0];
-                document.getElementById('fab-actions').classList.remove('hidden'); // إظهار الأزرار العائمة
-
-                // Check Admin
-                if (user.email === 'admin' || user.email === ADMIN_EMAIL_CHECK || user.email === "admin@gmail.com") {
+                
+                // تحقق من صلاحية الأدمن
+                if(user.email === 'admin@elaffroun.com') {
                     isAdmin = true;
                     document.getElementById('admin-ad-options').classList.remove('hidden');
                 } else {
@@ -478,183 +523,210 @@
                 isAdmin = false;
                 document.getElementById('auth-buttons').classList.remove('hidden');
                 document.getElementById('user-menu').classList.add('hidden');
-                document.getElementById('fab-actions').classList.add('hidden');
             }
         });
 
-        // Login Handler
+        // تسجيل الدخول العادي
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const emailInput = document.getElementById('login-email').value;
+            const email = document.getElementById('login-email').value;
             const pass = document.getElementById('login-password').value;
-            
-            // محاكاة دخول الأدمن المذكور في الطلب
-            let email = emailInput;
-            if (emailInput === "admin") {
-                email = "admin@elaffroun.com"; // تحويل اسم المستخدم إلى إيميل للتوافق مع فايربيس
-            }
-
             try {
                 await signInWithEmailAndPassword(auth, email, pass);
                 closeModal('loginModal');
-                showToast('تم تسجيل الدخول بنجاح', 'success');
-            } catch (error) {
-                showToast('خطأ: ' + error.message, 'error');
+                showToast('تم تسجيل الدخول', 'success');
+            } catch (err) {
+                showToast('خطأ في الدخول: ' + err.message, 'error');
             }
         });
 
-        // Signup Handler
+        // تسجيل دخول الأدمن السري
+        document.getElementById('adminForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const user = document.getElementById('admin-user').value;
+            const pass = document.getElementById('admin-pass').value;
+
+            if (user === 'admin' && pass === 'abobob123') {
+                // سنقوم بتسجيل الدخول بإيميل أدمن حقيقي مخفي في النظام
+                // يجب عليك إنشاء هذا المستخدم في Firebase Console بنفسك أو سننشئه تلقائياً هنا إذا لم يوجد
+                try {
+                    await signInWithEmailAndPassword(auth, "admin@elaffroun.com", "abobob123");
+                    closeModal('adminLoginModal');
+                    showToast('Welcome Boss!', 'success');
+                } catch (error) {
+                    // إذا لم يكن الحساب موجوداً في فايربيس، ننشئه (لأول مرة فقط)
+                    try {
+                        await createUserWithEmailAndPassword(auth, "admin@elaffroun.com", "abobob123");
+                        showToast('تم تهيئة حساب الأدمن', 'success');
+                        closeModal('adminLoginModal');
+                    } catch(createErr) {
+                         showToast('خطأ: ' + createErr.message, 'error');
+                    }
+                }
+            } else {
+                showToast('بيانات خاطئة', 'error');
+            }
+        });
+
+        // إنشاء حساب
         document.getElementById('signupForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('reg-email').value;
             const pass = document.getElementById('reg-pass').value;
-            const confirmPass = document.getElementById('reg-confirm-pass').value;
-            const name = document.getElementById('reg-name').value;
-            const phone = document.getElementById('reg-phone').value;
-
-            if (pass !== confirmPass) {
-                showToast('كلمتا المرور غير متطابقتين', 'error');
-                return;
-            }
-
             try {
-                const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
-                // يمكن تخزين الاسم والهاتف في Firestore collection "users" هنا
+                await createUserWithEmailAndPassword(auth, email, pass);
                 closeModal('signupModal');
-                showToast('تم إنشاء الحساب بنجاح', 'success');
-            } catch (error) {
-                showToast('خطأ: ' + error.message, 'error');
+                showToast('تم إنشاء الحساب', 'success');
+            } catch (err) {
+                showToast(err.message, 'error');
             }
         });
 
         window.logoutUser = () => {
             signOut(auth).then(() => {
-                showToast('تم تسجيل الخروج', 'success');
+                showToast('تم الخروج', 'success');
                 window.location.reload();
             });
         };
 
-        // ==================== Ad Functions ====================
-
-        // Upload Image
-        async function uploadImage(file) {
-            const storageRef = ref(storage, 'ads/' + Date.now() + '_' + file.name);
-            const snapshot = await uploadBytes(storageRef, file);
-            return await getDownloadURL(snapshot.ref);
-        }
-
-        // Add Ad
+        // ==================== Ad Operations (Fixes Here) ====================
+        
+        // دالة رفع الصورة ونشر الإعلان
         document.getElementById('addAdForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (!currentUser) return;
+            e.preventDefault(); // منع تحديث الصفحة
+            
+            // التأكد من تسجيل الدخول
+            if (!currentUser) {
+                showToast('يرجى تسجيل الدخول أولاً', 'error');
+                closeModal('addAdModal');
+                openModal('loginModal');
+                return;
+            }
 
-            showLoader(true);
+            // إظهار اللودر
+            const overlay = document.getElementById('upload-overlay');
+            overlay.classList.remove('hidden');
+
             try {
-                const category = document.getElementById('ad-category').value;
+                // 1. جمع البيانات
                 const title = document.getElementById('ad-title').value;
-                const price = parseFloat(document.getElementById('ad-price').value);
+                const price = Number(document.getElementById('ad-price').value);
+                const category = document.getElementById('ad-category').value;
                 const city = document.getElementById('ad-city').value;
                 const phone = document.getElementById('ad-phone').value;
                 const desc = document.getElementById('ad-desc').value;
-                const file = document.getElementById('ad-image').files[0];
+                const fileInput = document.getElementById('ad-image');
+                const file = fileInput.files[0];
                 const isAdminAd = document.getElementById('is-admin-ad').checked;
 
-                const imageUrl = await uploadImage(file);
+                if (!file) throw new Error("يرجى اختيار صورة");
 
+                // 2. رفع الصورة
+                const storageRef = ref(storage, 'ads/' + Date.now() + '_' + file.name);
+                const uploadSnap = await uploadBytes(storageRef, file);
+                const imageUrl = await getDownloadURL(uploadSnap.ref);
+
+                // 3. حفظ البيانات في Firestore
                 await addDoc(collection(db, "ads"), {
-                    title,
-                    price,
-                    category,
-                    city,
-                    phone,
+                    title: title,
+                    price: price,
+                    category: category,
+                    city: city,
+                    phone: phone,
                     description: desc,
-                    imageUrl,
+                    imageUrl: imageUrl,
                     userId: currentUser.uid,
                     createdAt: serverTimestamp(),
-                    isAdminAd: isAdmin && isAdminAd, // فقط الأدمن يمكنه جعلها True
-                    isFeatured: isAdmin && isAdminAd // الافتراضي
+                    isAdminAd: isAdmin && isAdminAd, // إذا كان أدمن واختار الخيار
+                    isFeatured: isAdmin && isAdminAd
                 });
 
+                // 4. نجاح العملية
+                overlay.classList.add('hidden');
                 closeModal('addAdModal');
                 document.getElementById('addAdForm').reset();
                 showToast('تم نشر الإعلان بنجاح!', 'success');
-                getAds(); // Refresh
+                
+                // تحديث القائمة
+                getAds();
+
             } catch (error) {
-                console.error(error);
-                showToast('حدث خطأ أثناء النشر', 'error');
-            } finally {
-                showLoader(false);
+                overlay.classList.add('hidden');
+                console.error("Error:", error);
+                showToast('حدث خطأ: ' + error.message, 'error');
             }
         });
 
-        // Get Ads & Display
+        // جلب الإعلانات
         async function getAds() {
-            showLoader(true);
+            const loader = document.getElementById('global-loader');
+            loader.style.display = 'block';
             const container = document.getElementById('ads-container');
-            container.innerHTML = '';
-            
+            container.innerHTML = ''; // تفريغ
+
             try {
-                // Fetch Ads
                 const q = query(collection(db, "ads"), orderBy("createdAt", "desc"));
-                const querySnapshot = await getDocs(q);
+                const snapshot = await getDocs(q);
                 
                 allAds = [];
-                querySnapshot.forEach((doc) => {
+                snapshot.forEach(doc => {
                     allAds.push({ id: doc.id, ...doc.data() });
                 });
 
-                // Fetch Admin Banner (Simulated Logic from Ads collection where isAdminAd is true and position is top)
-                // في هذا الكود البسيط سأعرض أول إعلان مميز كبانر إذا وجد
-                const bannerAd = allAds.find(ad => ad.isAdminAd === true);
-                if (bannerAd) {
+                // معالجة البانر (لأول إعلان إداري)
+                const banner = allAds.find(ad => ad.isAdminAd);
+                if (banner) {
                     document.getElementById('top-banner').style.display = 'block';
-                    document.getElementById('banner-img').src = bannerAd.imageUrl;
+                    document.getElementById('banner-img').src = banner.imageUrl;
                 }
 
                 renderAds(allAds);
-
             } catch (error) {
-                console.error("Error getting documents: ", error);
+                console.log(error);
+                container.innerHTML = '<p style="text-align:center">لا توجد إعلانات حالياً أو هناك مشكلة في الاتصال</p>';
             } finally {
-                showLoader(false);
+                loader.style.display = 'none';
             }
         }
 
-        function renderAds(adsList) {
+        function renderAds(list) {
             const container = document.getElementById('ads-container');
             container.innerHTML = '';
+            
+            if(list.length === 0) {
+                container.innerHTML = '<p style="text-align:center; width:100%; grid-column: 1/-1;">لا توجد نتائج مطابقة</p>';
+                return;
+            }
 
-            // Randomize order logic as requested (optional, here I kept sorting by date then random on display)
-            // adsList.sort(() => Math.random() - 0.5); 
-
-            adsList.forEach(ad => {
-                const isFeatured = ad.isFeatured ? 'featured-card' : '';
-                const badge = ad.isFeatured ? '<span class="ad-featured-badge"><i class="fas fa-star"></i> مميز</span>' : '';
+            list.forEach(ad => {
+                const isFeatured = ad.isFeatured ? 'featured-badge' : 'hidden';
+                const featuredBorder = ad.isFeatured ? 'border: 2px solid #ffc107;' : '';
                 
+                // أزرار التحكم للأدمن
                 let adminBtns = '';
                 if (isAdmin) {
                     adminBtns = `
                         <div class="admin-controls">
-                            <button onclick="deleteAd('${ad.id}')" class="btn btn-sm" style="background:red; color:white;">حذف</button>
-                            <button onclick="toggleFeatured('${ad.id}', ${!ad.isFeatured})" class="btn btn-sm" style="background:#ffc107;">${ad.isFeatured ? 'إلغاء التميز' : 'تميز'}</button>
+                            <span onclick="deleteAd('${ad.id}')" class="btn-sm btn-del">حذف</span>
+                            <span onclick="toggleFeature('${ad.id}', ${!ad.isFeatured})" class="btn-sm btn-feat">تثبيت</span>
                         </div>
                     `;
                 }
 
                 const html = `
-                    <div class="ad-card ${isFeatured}">
-                        ${badge}
-                        <div class="ad-image" onclick="showAdDetails('${ad.id}')">
-                            <img src="${ad.imageUrl}" alt="${ad.title}">
+                    <div class="ad-card" style="${featuredBorder}">
+                        <div class="ad-image">
+                            <img src="${ad.imageUrl}" alt="product" loading="lazy">
+                            <span class="ad-badge"><i class="fas fa-map-marker-alt"></i> ${ad.city}</span>
+                            <span class="ad-badge ${isFeatured}" style="right:auto; left:10px;">⭐ مميز</span>
                         </div>
                         <div class="ad-content">
-                            <div class="ad-price">${ad.price.toLocaleString()} DZD</div>
+                            <div class="ad-price">${ad.price.toLocaleString()} DA</div>
                             <h3 class="ad-title">${ad.title}</h3>
-                            <div class="ad-meta">
-                                <span><i class="fas fa-map-marker-alt"></i> ${ad.city}</span>
-                                <span><i class="fas fa-tag"></i> ${getCategoryName(ad.category)}</span>
+                            <div class="ad-footer">
+                                <span><i class="fas fa-clock"></i> منذ قليل</span>
+                                <button class="btn-outline" style="padding:2px 8px; border-radius:4px; font-size:0.8rem" onclick="showDetails('${ad.id}')">التفاصيل</button>
                             </div>
-                            <button class="btn btn-outline" style="width:100%; margin-top:10px; font-size:0.9rem" onclick="showAdDetails('${ad.id}')">التفاصيل</button>
                             ${adminBtns}
                         </div>
                     </div>
@@ -663,147 +735,114 @@
             });
         }
 
-        function getCategoryName(cat) {
-            const map = {
-                'vehicles': 'مركبات', 'real_estate': 'عقارات', 'electronics': 'إلكترونيات',
-                'jobs': 'وظائف', 'services': 'خدمات', 'appliances': 'أجهزة منزلية',
-                'fashion': 'موضة', 'professional': 'معدات', 'others': 'أخرى'
-            };
-            return map[cat] || cat;
-        }
-
-        // ==================== Feature/Filter Functions ====================
-
-        window.applyFilters = () => {
-            const cat = document.getElementById('filter-category').value;
-            const city = document.getElementById('filter-city').value;
-            const min = document.getElementById('filter-min-price').value;
-            const max = document.getElementById('filter-max-price').value;
-
-            let filtered = allAds.filter(ad => {
-                let matchCat = (cat === 'all') || (ad.category === cat);
-                let matchCity = (city === 'all') || (ad.city === city);
-                let matchMin = (!min) || (ad.price >= parseFloat(min));
-                let matchMax = (!max) || (ad.price <= parseFloat(max));
-                return matchCat && matchCity && matchMin && matchMax;
-            });
-
-            renderAds(filtered);
-            closeModal('filterModal');
-            showToast('تم تطبيق الفلتر', 'success');
-        };
-
-        // ==================== Interaction Functions ====================
+        // ==================== UI Functions ====================
         
-        window.showMarket = () => {
+        window.showAllProducts = () => {
             document.getElementById('hero').style.display = 'none';
             document.getElementById('market-section').classList.remove('hidden');
-            if (allAds.length === 0) getAds();
-            // Show FABs if logged in
-            if (currentUser) document.getElementById('fab-actions').classList.remove('hidden');
-        };
-
-        window.showSection = (id) => {
-            if (id === 'hero') {
-                document.getElementById('hero').style.display = 'flex';
-                document.getElementById('market-section').classList.add('hidden');
-                document.getElementById('fab-actions').classList.add('hidden');
-            }
+            if(allAds.length === 0) getAds();
+            window.scrollTo({top: document.getElementById('market-section').offsetTop, behavior: 'smooth'});
         };
 
         window.checkAuthAndOpenAdd = () => {
             if (currentUser) {
                 openModal('addAdModal');
             } else {
-                showToast('يجب تسجيل الدخول أولاً', 'error');
+                // فتح نافذة الدخول إذا لم يكن مسجلاً
+                showToast('يرجى تسجيل الدخول لنشر إعلان', 'error');
                 openModal('loginModal');
             }
         };
 
-        window.showAdDetails = (id) => {
-            const ad = allAds.find(a => a.id === id);
-            if(!ad) return;
+        window.applyFilters = () => {
+            const keyword = document.getElementById('search-keyword').value.toLowerCase();
+            const cat = document.getElementById('filter-category').value;
+            const city = document.getElementById('filter-city').value;
 
-            const content = document.getElementById('details-content');
-            
-            // تحقق إذا كان المستخدم مسجل للدخول لرؤية الرقم
-            let contactInfo = '';
+            const filtered = allAds.filter(ad => {
+                const matchKey = ad.title.toLowerCase().includes(keyword);
+                const matchCat = cat === 'all' || ad.category === cat;
+                const matchCity = city === 'all' || ad.city === city;
+                return matchKey && matchCat && matchCity;
+            });
+
+            renderAds(filtered);
+            closeModal('filterModal');
+            showAllProducts(); // التأكد من أننا في واجهة السوق
+        };
+
+        window.showDetails = (id) => {
+            const ad = allAds.find(a => a.id === id);
+            if (!ad) return;
+
+            let contactHtml = '';
             if (currentUser) {
-                contactInfo = `
-                    <div style="background:#f0f0f0; padding:15px; border-radius:5px; margin-top:15px;">
-                        <p><strong>رقم الهاتف:</strong> <a href="tel:${ad.phone}">${ad.phone}</a></p>
-                        <button class="btn btn-primary" style="margin-top:5px; width:100%">ابدأ الدردشة (قريباً)</button>
+                contactHtml = `
+                    <div style="background:#e3f2fd; padding:15px; border-radius:8px; margin-top:15px;">
+                        <h4 style="color:var(--secondary)">معلومات الاتصال</h4>
+                        <p style="font-size:1.2rem; font-weight:bold; margin-top:5px;">
+                            <i class="fas fa-phone-alt"></i> ${ad.phone}
+                        </p>
+                        <a href="tel:${ad.phone}" class="btn btn-primary" style="display:block; text-align:center; margin-top:10px;">اتصال الآن</a>
                     </div>
                 `;
             } else {
-                contactInfo = `
-                    <div style="background:#ffeeba; padding:10px; border-radius:5px; margin-top:15px; text-align:center;">
-                        <p style="color:#856404;">يجب تسجيل الدخول لرؤية معلومات الاتصال</p>
-                        <button onclick="closeModal('detailsModal'); openModal('loginModal')" class="btn btn-primary" style="margin-top:5px;">تسجيل دخول</button>
+                contactHtml = `
+                    <div style="background:#fff3cd; padding:15px; border-radius:8px; margin-top:15px; text-align:center;">
+                        <p style="color:#856404; font-weight:bold;">يجب تسجيل الدخول لرؤية رقم الهاتف</p>
+                        <button onclick="closeModal('detailsModal'); openModal('loginModal')" class="btn btn-primary" style="margin-top:10px;">تسجيل دخول</button>
                     </div>
                 `;
             }
 
+            const content = document.getElementById('details-content');
             content.innerHTML = `
-                <img src="${ad.imageUrl}" style="width:100%; border-radius:8px; max-height:300px; object-fit:contain; background:#eee;">
-                <h2 style="margin:15px 0; color:var(--secondary)">${ad.title}</h2>
-                <h3 style="color:var(--primary);">${ad.price.toLocaleString()} DZD</h3>
-                <p style="color:#666; font-size:0.9rem; margin:5px 0;"><i class="fas fa-map-marker-alt"></i> ${ad.city} | ${getCategoryName(ad.category)}</p>
-                <hr style="margin:15px 0; border:0; border-top:1px solid #eee;">
-                <p style="line-height:1.6;">${ad.description}</p>
-                ${contactInfo}
+                <img src="${ad.imageUrl}" style="width:100%; border-radius:10px; margin-bottom:15px;">
+                <h2 style="color:var(--secondary);">${ad.title}</h2>
+                <h3 style="color:var(--primary); font-size:1.5rem; margin:10px 0;">${ad.price.toLocaleString()} DA</h3>
+                <p style="color:#666; line-height:1.6;">${ad.description}</p>
+                <div style="margin-top:10px; font-size:0.9rem; color:#888;">
+                    <span><i class="fas fa-map-marker-alt"></i> ${ad.city}</span> | 
+                    <span><i class="fas fa-tag"></i> ${ad.category}</span>
+                </div>
+                ${contactHtml}
             `;
             openModal('detailsModal');
         };
 
-        // ==================== Admin Functions ====================
-        
+        // Admin Actions
         window.deleteAd = async (id) => {
-            if(!confirm('هل أنت متأكد من حذف هذا الإعلان؟')) return;
-            try {
+            if(confirm('حذف نهائي؟')) {
                 await deleteDoc(doc(db, "ads", id));
-                showToast('تم حذف الإعلان', 'success');
                 getAds();
-            } catch (e) {
-                console.error(e);
             }
         };
 
-        window.toggleFeatured = async (id, status) => {
-            try {
-                await updateDoc(doc(db, "ads", id), {
-                    isFeatured: status
-                });
-                showToast('تم تحديث الحالة', 'success');
-                getAds();
-            } catch (e) {
-                console.error(e);
-            }
+        window.toggleFeature = async (id, status) => {
+            await updateDoc(doc(db, "ads", id), { isFeatured: status });
+            getAds();
         };
 
-        // ==================== UI Helper Functions ====================
-        
-        window.openModal = (id) => { document.getElementById(id).classList.add('active'); };
-        window.closeModal = (id) => { document.getElementById(id).classList.remove('active'); };
+        // Helpers
+        window.openModal = (id) => document.getElementById(id).classList.add('active');
+        window.closeModal = (id) => document.getElementById(id).classList.remove('active');
         
         window.showToast = (msg, type) => {
             const t = document.getElementById('toast');
             t.innerText = msg;
             t.className = `toast ${type}`;
             t.style.display = 'block';
-            setTimeout(() => { t.style.display = 'none'; }, 3000);
+            setTimeout(() => t.style.display = 'none', 3000);
+        };
+        
+        // إغلاق النوافذ عند النقر خارجها
+        window.onclick = (e) => {
+            if (e.target.classList.contains('modal')) e.target.classList.remove('active');
         };
 
-        function showLoader(show) {
-            document.getElementById('loader').style.display = show ? 'block' : 'none';
-        }
+        // تشغيل مبدئي لجلب الإعلانات في الخلفية
+        getAds();
 
-        // Close modals when clicking outside
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.classList.remove('active');
-            }
-        }
     </script>
 </body>
 </html>
